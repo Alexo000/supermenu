@@ -159,7 +159,7 @@ const D=JSON.parse(document.getElementById('data').textContent);
 const PRINT=false; // the site build turns this on; the hosted preview cannot print
 const SHOW=12, PICKS=3, TAG='#supermenuARS';
 // a short code for each sheet, so it can be marked done later (no confusable letters)
-function newCode(){const A='ABCDEFGHJKMNPQRSTUVWXYZ23456789',v=crypto.getRandomValues(new Uint32Array(4));return 'SM-'+[...v].map(x=>A[x%A.length]).join('')}
+/*__CODEC__*/
 
 const WORDS={
  en:{lede:'Pick three objects from the case. The machine answers with one thing to do.',
@@ -261,12 +261,12 @@ function toggle(id){
 }
 $('go').addEventListener('click',()=>{
   if(S.picks.length<PICKS)return;
-  S.ranked=rank(S.picks);S.at=0;S.code=newCode();recordPicks(S.picks,S.ranked[0].n);
+  S.ranked=rank(S.picks);S.at=0;S.code=encodeSheet(S.picks,S.ranked[0].n);recordPicks(S.picks,S.ranked[0].n);
   $('answer').hidden=false;renderSheet(true);
   $('answer').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
 });
 $('print').addEventListener('click',()=>window.print());
-$('next').addEventListener('click',()=>{S.at=(S.at+1)%S.ranked.length;S.code=newCode();renderSheet(true)});
+$('next').addEventListener('click',()=>{S.at=(S.at+1)%S.ranked.length;S.code=encodeSheet(S.picks,S.ranked[S.at].n);renderSheet(true)});
 $('again').addEventListener('click',()=>{S.picks=[];S.setNo++;newSet();$('answer').hidden=true;renderAll();window.scrollTo({top:0})});
 $('reshuffle').addEventListener('click',()=>{S.setNo++;newSet();$('answer').hidden=true;renderAll()});
 $('copy').addEventListener('click',()=>{

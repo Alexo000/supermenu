@@ -1,0 +1,64 @@
+<title>Supermenu Decoder</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* For Alejandro only: read the code on a returned sheet. Shows the operations, so it stays off the public site. */
+:root{--ground:#FFFFFF;--case:#FFCCCC;--ink:#000033;--mark:#FF5E39;--rule:#CCCCCC;--soft:#5A5A73;
+  --f-num:"VT323",ui-monospace,"Courier New",monospace;--f-text:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color-scheme:light}
+*,*::before,*::after{box-sizing:border-box}[hidden]{display:none!important}
+html,body{background:var(--ground);color:var(--ink);margin:0}
+body{font-family:var(--f-text);font-size:15px;line-height:1.5}
+.wrap{max-width:900px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:20px}
+.wrap>*{min-width:0}
+h1{font-family:var(--f-num);font-weight:400;font-size:56px;line-height:.9;margin:0}
+p{margin:0;max-width:62ch}
+label{font-weight:600}
+textarea{width:100%;min-height:90px;font-family:var(--f-num);font-size:22px;padding:10px;border:1px solid var(--ink);color:var(--ink);background:var(--ground);text-transform:uppercase}
+textarea:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
+.list{display:grid;gap:12px}
+.card{border-top:1px solid var(--ink);padding-top:12px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 20px}
+.code{font-family:var(--f-num);font-size:28px;line-height:1}
+.bad{color:var(--mark)}
+.objs{display:flex;gap:12px;flex-wrap:wrap}
+.objs figure{margin:0;display:grid;justify-items:center;gap:2px;background:var(--case);padding:6px 8px}
+.objs img{height:64px;width:auto;max-width:80px;object-fit:contain;filter:grayscale(1);mix-blend-mode:multiply}
+.objs figcaption{font-family:var(--f-num);font-size:16px;line-height:1.1;text-align:center}
+.task{font-weight:600;font-size:18px}
+.es{color:var(--soft)}
+.ops{font-family:var(--f-num);font-size:17px;color:var(--soft)}
+@media (max-width:560px){.card{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+  <h1>Supermenu decoder</h1>
+  <p>Type or paste the code from a returned sheet, one per line. Each code gives back the three objects in the order they were picked and the task the sheet carried. For you only: it names the operations.</p>
+  <div><label for="codes">Codes</label><textarea id="codes" spellcheck="false" autocomplete="off">__SAMPLE__</textarea></div>
+  <div class="list" id="list" aria-live="polite"></div>
+</div>
+<script id="data" type="application/json">__DATA__</script>
+<script>
+(()=>{
+const D=JSON.parse(document.getElementById('data').textContent);
+/*__CODEC__*/
+const OBJ=Object.fromEntries(D.objects.map(o=>[o.id,o])),TASK=Object.fromEntries(D.tasks.map(t=>[t.n,t]));
+const pad=n=>String(n).padStart(3,'0');
+function el(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
+function show(){
+  const list=document.getElementById('list');list.textContent='';
+  const codes=document.getElementById('codes').value.split(/[\s,;]+/).filter(Boolean);
+  for(const code of codes){
+    const card=el('article','card'),r=decodeSheet(code);
+    card.append(el('div','code'+(r?'':' bad'),code.toUpperCase()));
+    const body=el('div');
+    if(!r){body.append(el('p','bad','Not a Supermenu code. Codes look like SM-K7QD: four characters, no O, I, L, 0 or 1.'))}
+    else{
+      const objs=el('div','objs');
+      for(const id of r.objects){const o=OBJ[id],f=el('figure'),img=el('img');img.src=o.img;img.alt='Object '+pad(id);f.append(img,el('figcaption',null,pad(id)+'\n'+o.op));objs.append(f)}
+      const t=TASK[r.task];
+      body.append(objs,el('p','task','Task '+t.n+': '+t.en),el('p','es',t.es),el('p','ops','Task chain: '+t.chain.join(' · ')));
+      body.style.display='grid';body.style.gap='8px';
+    }
+    card.append(body);list.append(card);
+  }
+}
+document.getElementById('codes').addEventListener('input',show);show();
+})();
+</script>
