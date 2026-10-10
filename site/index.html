@@ -232,6 +232,24 @@ function rank(ids){
 function recordPicks(ids,taskN){/* intentionally empty in this version */}
 
 const S={setNo:1,seed:0,shown:[],picks:[],ranked:[],at:0,code:''};
+/* Embedded on another page (Squarespace): tell that page how tall this one is, so it shows no scroll bar
+   of its own, and ask it to scroll when the sheet appears. See embed.html for the other half. */
+const EMBED=PRINT&&(()=>{try{return window.self!==window.top}catch(e){return true}})(); // only the site build talks to its host page
+function tellParent(msg){if(EMBED)try{parent.postMessage(Object.assign({supermenu:true},msg),'*')}catch(e){}}
+if(EMBED){const send=()=>tellParent({h:Math.ceil(document.body.getBoundingClientRect().height)});
+  try{new ResizeObserver(send).observe(document.body)}catch(e){setInterval(send,800)}window.addEventListener('load',send)}
+function goTo(el){
+  const smooth=matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
+  if(EMBED)tellParent({y:el?Math.round(el.getBoundingClientRect().top+window.scrollY):0});
+  else if(el)el.scrollIntoView({behavior:smooth,block:'start'});else window.scrollTo({top:0});
+}
+// A sheet can be reopened from its code (#SM-XXXX), which is how printing works from inside an embed
+function openFromCode(code){
+  const r=decodeSheet(code);if(!r||!r.objects.every(id=>OBJ[id]))return false;
+  S.picks=r.objects.slice();const rest=S.shown.filter(id=>!S.picks.includes(id));S.shown=[...S.picks,...rest].slice(0,SHOW);
+  S.ranked=rank(S.picks);S.at=Math.max(0,S.ranked.findIndex(t=>t.n===r.task));S.code=encodeSheet(S.picks,S.ranked[S.at].n);
+  $('answer').hidden=false;return true;
+}
 function newSet(){
   S.seed=(crypto.getRandomValues(new Uint32Array(1))[0])||Date.now();
   S.shown=shuffle(D.objects.map(o=>o.id),rng(S.seed)).slice(0,SHOW);
@@ -291,11 +309,14 @@ $('go').addEventListener('click',()=>{
   if(S.picks.length<PICKS)return;
   S.ranked=rank(S.picks);S.at=0;S.code=encodeSheet(S.picks,S.ranked[0].n);recordPicks(S.picks,S.ranked[0].n);
   $('answer').hidden=false;renderSheet(true);
-  $('answer').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+  goTo($('answer'));
 });
-$('print').addEventListener('click',()=>window.print());
+$('print').addEventListener('click',()=>{
+  if(EMBED){const u=location.origin+location.pathname+'?print#'+S.code;const w=window.open(u,'_blank');if(!w)location.href=u}
+  else window.print();
+});
 $('next').addEventListener('click',()=>{S.at=(S.at+1)%S.ranked.length;S.code=encodeSheet(S.picks,S.ranked[S.at].n);renderSheet(true)});
-$('again').addEventListener('click',()=>{S.picks=[];S.setNo++;newSet();$('answer').hidden=true;renderAll();window.scrollTo({top:0})});
+$('again').addEventListener('click',()=>{S.picks=[];S.setNo++;newSet();$('answer').hidden=true;renderAll();goTo(null)});
 $('reshuffle').addEventListener('click',()=>{S.setNo++;newSet();$('answer').hidden=true;renderAll()});
 $('copy').addEventListener('click',()=>{
   const text=$('task').textContent;
@@ -304,7 +325,10 @@ $('copy').addEventListener('click',()=>{
 });
 for(const b of document.querySelectorAll('.lang button'))b.addEventListener('click',()=>{lang=b.dataset.lang;try{localStorage.setItem('supermenu.lang',lang)}catch(e){}renderAll()});
 
-newSet();renderAll();
+newSet();
+const fromCode=/^#SM-[A-Z0-9]{4}$/i.test(location.hash)&&openFromCode(location.hash.slice(1));
+renderAll();
+if(fromCode){if(/[?&]print\b/.test(location.search)&&PRINT&&!EMBED)setTimeout(()=>window.print(),600);else goTo($('answer'))}
 })();
 </script>
 

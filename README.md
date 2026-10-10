@@ -6,6 +6,7 @@ laid out as an A4 sheet to do the task on, tick (Done / Not for me) and, if want
 - `site/index.html` is the whole page, ready for Netlify. Drag the `site` folder onto the site's Deploys page.
 - `template.html` holds the page; `data.json` the 29 objects (with their operation), the operations map and the 30 tasks.
 - `decoder.html` reads the code on a returned sheet (SM- and four characters): the three objects in the order picked and the task. For you only, as it names the operations; it is not part of `site`. Open it from disk.
+- `embed.html` is the snippet for a Squarespace Code block. It lets the page set its own height on the host page (no inner scroll bar on phones) and scroll it to the sheet. Printing from inside the embed opens the sheet on its own tab (`?print#SM-XXXX`) and prints there.
 - `codec.js` is how codes are made and read; both pages use it.
 - `python3 build.py` rebuilds `site/index.html` (plus `decoder.html`, and `supermenu.html`, the private preview on claude.ai) after any change.
 
