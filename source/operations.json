@@ -1,0 +1,722 @@
+{
+ "ACCUMULATE": {
+  "no": "5",
+  "def": "Add without editing",
+  "do": "Keep adding; never select.",
+  "cat": "MATERIAL",
+  "obj": "material in hand; process",
+  "z": "Determinate",
+  "xy": [
+   5.0,
+   5.0
+  ]
+ },
+ "ALIGN": {
+  "no": "54",
+  "def": "Align separately produced layers",
+  "do": "Give independently made parts one shared reference and align them to it; stop when they read as one.",
+  "cat": "STRUCTURE",
+  "obj": "structure of the artefact",
+  "z": "Determinate",
+  "xy": [
+   2.0,
+   2.0
+  ]
+ },
+ "ALTERNATE": {
+  "no": "143",
+  "def": "Switch between two states on a fixed pattern; neither is final",
+  "do": "Switch between two on a fixed pattern; neither is the end.",
+  "cat": "STRUCTURE",
+  "obj": "structure of the artefact; process",
+  "z": "Determinate",
+  "xy": [
+   4.0,
+   2.0
+  ]
+ },
+ "ATTEND": {
+  "no": "25",
+  "def": "Sustain attention without agenda",
+  "do": "Watch with no goal and collect nothing; the first note or insight you take ends it.",
+  "cat": "ATTENTION",
+  "obj": "attention",
+  "z": "Determinate",
+  "xy": [
+   4.0,
+   2.0
+  ]
+ },
+ "BUILD ON THE MARKS": {
+  "no": "74",
+  "def": "Coordinate through traces left in the environment rather than direct communication",
+  "do": "The trace decides where the next act goes.",
+  "cat": "RELATIONSHIP",
+  "obj": "social arrangement; process",
+  "z": "Indeterminate",
+  "xy": [
+   4.0,
+   4.0
+  ]
+ },
+ "CALIBRATE": {
+  "no": "57",
+  "def": "Check against original intention, correct drift",
+  "do": "Check the work against the stated intention at fixed points, never against today's taste; correct only the drift.",
+  "cat": "PROCESS",
+  "obj": "process",
+  "z": "Determinate",
+  "xy": [
+   3.0,
+   2.0
+  ]
+ },
+ "CLASSIFY": {
+  "no": "66",
+  "def": "Sort instances until the system appears",
+  "do": "Sort until the sorting rule appears.",
+  "cat": "KNOWLEDGE",
+  "obj": "material in hand",
+  "z": "Determinate",
+  "xy": [
+   3.0,
+   2.0
+  ]
+ },
+ "CONCEAL": {
+  "no": "67",
+  "def": "Withhold something from view so its absence operates",
+  "do": "Withhold it where everyone can see it is withheld; the cover never comes off.",
+  "cat": "PERCEPTION",
+  "obj": "structure of the artefact; attention",
+  "z": "Determinate",
+  "xy": [
+   1.0,
+   2.0
+  ]
+ },
+ "CONSTRAIN": {
+  "no": "9",
+  "def": "Make one category of decision impossible",
+  "do": "Ban one whole category of choices; work inside what's left.",
+  "cat": "STRUCTURE",
+  "obj": "process",
+  "z": "Indeterminate",
+  "xy": [
+   1.0,
+   3.0
+  ]
+ },
+ "CONTAIN": {
+  "no": "147",
+  "def": "Put one whole thing inside another and keep both edges",
+  "do": "Put one whole inside another; keep both edges; the inner one comes out whole.",
+  "cat": "STRUCTURE",
+  "obj": "structure of the artefact; frame",
+  "z": "Determinate",
+  "xy": [
+   1.0,
+   2.0
+  ]
+ },
+ "COUPLE": {
+  "no": "145",
+  "def": "Tie two things so that a change in one moves the other",
+  "do": "Tie the two; change one; let the other move only through the tie.",
+  "cat": "SYSTEM",
+  "obj": "structure of the artefact; material in hand",
+  "z": "Indeterminate",
+  "xy": [
+   4.0,
+   4.0
+  ]
+ },
+ "DEFER": {
+  "no": "15",
+  "def": "Give the decision away",
+  "do": "Hand the decision over and obey the answer; no taking it back, even when you dislike it.",
+  "cat": "PROCESS",
+  "obj": "process; social arrangement",
+  "z": "Indeterminate",
+  "xy": [
+   1.0,
+   5.0
+  ]
+ },
+ "DEGRADE": {
+  "no": "6",
+  "def": "Reduce fidelity to find threshold",
+  "do": "Reduce step by step until it stops working; the failure point is the finding.",
+  "cat": "MATERIAL",
+  "obj": "material in hand",
+  "z": "Determinate",
+  "xy": [
+   3.0,
+   2.0
+  ]
+ },
+ "DELEGATE": {
+  "no": "30",
+  "def": "Distribute authorship across participants",
+  "do": "Keep only the frame and hand every decision inside it to the group; never override what comes back.",
+  "cat": "RELATIONSHIP",
+  "obj": "social arrangement; process",
+  "z": "Indeterminate",
+  "xy": [
+   2.0,
+   5.0
+  ]
+ },
+ "DEPRIVE": {
+  "no": "63",
+  "def": "Remove a sensory channel entirely",
+  "do": "Remove the whole channel, not some of it; keep it gone until the other senses have reorganised.",
+  "cat": "PERCEPTION",
+  "obj": "attention",
+  "z": "Determinate",
+  "xy": [
+   1.0,
+   2.0
+  ]
+ },
+ "DIFFER FROM EACH": {
+  "no": "C2",
+  "def": "Make a new thing that differs from each earlier one in a different respect",
+  "do": "Depart from each earlier one in its own respect, one respect each.",
+  "cat": "STRUCTURE",
+  "obj": "structure of the artefact",
+  "z": "Determinate",
+  "xy": [
+   2.0,
+   4.0
+  ]
+ },
+ "DISPERSE": {
+  "no": "96",
+  "def": "Spread the whole across excess incomplete parts so many subsets remain sufficient",
+  "do": "Cut into more pieces than needed so any two-thirds work; pull a third at random; if it breaks, spread it and try again.",
+  "cat": "SYSTEM",
+  "obj": "structure of the artefact; social arrangement",
+  "z": "Determinate",
+  "xy": [
+   2.0,
+   2.0
+  ]
+ },
+ "DISSOLVE AND REBUILD": {
+  "no": "49",
+  "def": "Dissolve completely then reconstitute",
+  "do": "Break it down until no part survives intact, then rebuild from the residue alone.",
+  "cat": "SELF AND SITUATION",
+  "obj": "material in hand",
+  "z": "Liminal",
+  "xy": [
+   5.0,
+   4.0
+  ]
+ },
+ "DON'T REPEAT YET": {
+  "no": "71",
+  "def": "Keep recent moves unavailable until enough different ones have been made",
+  "do": "What you just did is off-limits, and comes back only after enough different moves.",
+  "cat": "PROCESS",
+  "obj": "process",
+  "z": "Determinate",
+  "xy": [
+   3.0,
+   3.0
+  ]
+ },
+ "ELICIT": {
+  "no": "38",
+  "def": "Surface latent knowledge",
+  "do": "Supply only the shape of the prompt, never the content; everything that appears must come from them.",
+  "cat": "KNOWLEDGE",
+  "obj": "social arrangement; process",
+  "z": "Indeterminate",
+  "xy": [
+   2.0,
+   5.0
+  ]
+ },
+ "END WHILE IT WORKS": {
+  "no": "58",
+  "def": "Retire something deliberately, while it still works",
+  "do": "Set the end while it still works and keep to it; never wait for it to fail.",
+  "cat": "TIME",
+  "obj": "process",
+  "z": "Determinate",
+  "xy": [
+   4.0,
+   3.0
+  ]
+ },
+ "EXAGGERATE": {
+  "no": "112",
+  "def": "Amplify one attribute past proportion",
+  "do": "One feature, too big; still itself.",
+  "cat": "STRUCTURE",
+  "obj": "material in hand; structure of the artefact",
+  "z": "Determinate",
+  "xy": [
+   1.0,
+   2.0
+  ]
+ },
+ "EXCHANGE": {
+  "no": "29",
+  "def": "Pass something between parties so the transfer becomes the event",
+  "do": "Pass it between parties in both directions; stop when each side holds something that came from the other.",
+  "cat": "RELATIONSHIP",
+  "obj": "social arrangement; material in hand",
+  "z": "Determinate",
+  "xy": [
+   1.0,
+   4.0
+  ]
+ },
+ "EXECUTE": {
+  "no": "68",
+  "def": "Take up and continue what another began",
+  "do": "Continue what another began and keep every decision they made; no starting over.",
+  "cat": "SELF AND SITUATION",
+  "obj": "process; social arrangement",
+  "z": "Indeterminate",
+  "xy": [
+   3.0,
+   4.0
+  ]
+ },
+ "EXHAUST": {
+  "no": "2",
+  "def": "Document every instance completely",
+  "do": "Record every instance, the dull ones too; stop only when none are left.",
+  "cat": "MATERIAL",
+  "obj": "material in hand",
+  "z": "Determinate",
+  "xy": [
+   4.0,
+   3.0
+  ]
+ },
+ "FEED BACK": {
+  "no": "43",
+  "def": "Make the system respond to its own output",
+  "do": "Route the output back into the system and leave the loop closed until the system has acted on it.",
+  "cat": "SYSTEM",
+  "obj": "process",
+  "z": "Determinate",
+  "xy": [
+   5.0,
+   3.0
+  ]
+ },
+ "FIND THE THRESHOLD": {
+  "no": "44",
+  "def": "Find where quantity becomes quality",
+  "do": "Vary one amount until it changes kind; cross the point from both sides and mark exactly where it is.",
+  "cat": "SYSTEM",
+  "obj": "material in hand",
+  "z": "Liminal",
+  "xy": [
+   1.0,
+   3.0
+  ]
+ },
+ "FOREGROUND": {
+  "no": "11",
+  "def": "Make the background the subject",
+  "do": "Work only on the incidental; no return to the official subject until the time you set is up.",
+  "cat": "STRUCTURE",
+  "obj": "frame",
+  "z": "Determinate",
+  "xy": [
+   1.0,
+   2.0
+  ]
+ },
+ "GENERALISE": {
+  "no": "51",
+  "def": "Move from instance to principle",
+  "do": "State the pattern as a rule an instance could break; stop when you can name the case that would break it.",
+  "cat": "KNOWLEDGE",
+  "obj": "frame",
+  "z": "Determinate",
+  "xy": [
+   2.0,
+   1.0
+  ]
+ },
+ "GRAFT": {
+  "no": "7",
+  "def": "Join incompatible things permanently",
+  "do": "Join them so they cannot be taken apart; stop when pulling would break something rather than separate it.",
+  "cat": "MATERIAL",
+  "obj": "material in hand; structure of the artefact",
+  "z": "Indeterminate",
+  "xy": [
+   1.0,
+   4.0
+  ]
+ },
+ "HALVE": {
+  "no": "131",
+  "def": "Split the field in two, keep the half that holds it, and split again",
+  "do": "Cut in two; keep the half that holds it; cut again; stop at one.",
+  "cat": "KNOWLEDGE",
+  "obj": "process",
+  "z": "Determinate",
+  "xy": [
+   2.0,
+   1.0
+  ]
+ },
+ "HAND OVER": {
+  "no": "56",
+  "def": "Transfer full ownership so it continues without you",
+  "do": "Give away the authority itself; after the handover, no advice, check-ins or quiet corrections.",
+  "cat": "SELF AND SITUATION",
+  "obj": "social arrangement",
+  "z": "Indeterminate",
+  "xy": [
+   4.0,
+   4.0
+  ]
+ },
+ "ITERATE": {
+  "no": "19",
+  "def": "Feed output back as input",
+  "do": "Run the cycle again on its own output; don't stop at one.",
+  "cat": "PROCESS",
+  "obj": "process",
+  "z": "Indeterminate",
+  "xy": [
+   5.0,
+   4.0
+  ]
+ },
+ "JUXTAPOSE": {
+  "no": "13",
+  "def": "Place adjacent without explaining",
+  "do": "Place them side by side with no caption; stop before you explain the pairing.",
+  "cat": "STRUCTURE",
+  "obj": "structure of the artefact",
+  "z": "Indeterminate",
+  "xy": [
+   1.0,
+   4.0
+  ]
+ },
+ "LAY OVER": {
+  "no": "132",
+  "def": "Lay one thing over another on the same ground; keep each whole",
+  "do": "Lay each layer over the last; keep each whole; read the stack.",
+  "cat": "STRUCTURE",
+  "obj": "structure of the artefact",
+  "z": "Indeterminate",
+  "xy": [
+   1.0,
+   3.0
+  ]
+ },
+ "LEASE": {
+  "no": "118",
+  "def": "Grant authority until a deadline; it lapses unless renewed",
+  "do": "Grant it with an end date; it lapses unless renewed.",
+  "cat": "TIME",
+  "obj": "social arrangement",
+  "z": "Determinate",
+  "xy": [
+   4.0,
+   2.0
+  ]
+ },
+ "LOCATE": {
+  "no": "26",
+  "def": "Establish position as content",
+  "do": "Choose where it stands and be ready to defend the choice; nothing starts until \"here\" is decided.",
+  "cat": "ATTENTION",
+  "obj": "frame",
+  "z": "Determinate",
+  "xy": [
+   1.0,
+   2.0
+  ]
+ },
+ "MARK TIME": {
+  "no": "35",
+  "def": "Make time's passage visible through accumulated evidence",
+  "do": "One mark per fixed interval; a missed interval stays missed, and no mark is ever made late.",
+  "cat": "TIME",
+  "obj": "process; material in hand",
+  "z": "Determinate",
+  "xy": [
+   5.0,
+   3.0
+  ]
+ },
+ "MIMIC": {
+  "no": "114",
+  "def": "Make one thing pass as another",
+  "do": "Make it pass as something else.",
+  "cat": "KNOWLEDGE",
+  "obj": "structure of the artefact; attention",
+  "z": "Determinate",
+  "xy": [
+   2.0,
+   3.0
+  ]
+ },
+ "MORPH": {
+  "no": "148",
+  "def": "Start from a version that works; change it by small steps toward another form, keeping it working at every step",
+  "do": "Change one step at a time toward the chosen form; every step must work.",
+  "cat": "PROCESS",
+  "obj": "structure of the artefact; process",
+  "z": "Determinate",
+  "xy": [
+   3.0,
+   3.0
+  ]
+ },
+ "NAME": {
+  "no": "52",
+  "def": "Give something its exact word",
+  "do": "Find the exact word, not the near one; stop when you can say what the name leaves out.",
+  "cat": "KNOWLEDGE",
+  "obj": "language",
+  "z": "Determinate",
+  "xy": [
+   1.0,
+   1.0
+  ]
+ },
+ "OCCUPY": {
+  "no": "61",
+  "def": "Claim a position and hold it, so presence becomes structural",
+  "do": "Take the position and stay, without explaining why; the first justification turns it into a request.",
+  "cat": "SPACE",
+  "obj": "frame; social arrangement",
+  "z": "Determinate",
+  "xy": [
+   4.0,
+   2.0
+  ]
+ },
+ "PARTITION": {
+  "no": "62",
+  "def": "Divide continuous space into zones with different rules",
+  "do": "Draw the line and give each side a different rule; if both sides keep the same rule, the line is decoration.",
+  "cat": "SPACE",
+  "obj": "frame",
+  "z": "Indeterminate",
+  "xy": [
+   2.0,
+   4.0
+  ]
+ },
+ "RAISE THE COST": {
+  "no": "76",
+  "def": "Let use change the threshold for future use",
+  "do": "Each use raises the cost of the next; stop at the first skip and count the uses.",
+  "cat": "TIME",
+  "obj": "process",
+  "z": "Determinate",
+  "xy": [
+   4.0,
+   3.0
+  ]
+ },
+ "RANK": {
+  "no": "140",
+  "def": "Put things in order of importance and show the order",
+  "do": "Order by importance, no ties; show the order in size or place.",
+  "cat": "STRUCTURE",
+  "obj": "structure of the artefact",
+  "z": "Determinate",
+  "xy": [
+   1.0,
+   1.0
+  ]
+ },
+ "READ THE INTERFERENCE": {
+  "no": "55",
+  "def": "Identify interference between two consistent systems",
+  "do": "Overlay the two systems and read only the interference; blame neither.",
+  "cat": "SYSTEM",
+  "obj": "structure of the artefact",
+  "z": "Determinate",
+  "xy": [
+   2.0,
+   3.0
+  ]
+ },
+ "REFRAME": {
+  "no": "27",
+  "def": "Change the boundary, not the content",
+  "do": "Move only the edge and leave the content alone; stop when every change you see traces back to the edge.",
+  "cat": "ATTENTION",
+  "obj": "frame",
+  "z": "Indeterminate",
+  "xy": [
+   1.0,
+   3.0
+  ]
+ },
+ "RELOCATE": {
+  "no": "65",
+  "def": "Move something so its context changes its meaning",
+  "do": "Move it untouched and let the new surroundings do all the changing; any change to the thing itself voids it.",
+  "cat": "SPACE",
+  "obj": "frame",
+  "z": "Indeterminate",
+  "xy": [
+   1.0,
+   4.0
+  ]
+ },
+ "REPLICATE": {
+  "no": "69",
+  "def": "Duplicate faithfully without transformation",
+  "do": "Copy exactly; change nothing.",
+  "cat": "MATERIAL",
+  "obj": "material in hand",
+  "z": "Determinate",
+  "xy": [
+   2.0,
+   2.0
+  ]
+ },
+ "RITUALISE": {
+  "no": "59",
+  "def": "Turn a single action into a structure that repeats",
+  "do": "Fix the form and the schedule, stated well enough to teach; repeat it exactly, every time.",
+  "cat": "TIME",
+  "obj": "process; social arrangement",
+  "z": "Determinate",
+  "xy": [
+   3.0,
+   4.0
+  ]
+ },
+ "RUN IT LONG": {
+  "no": "37",
+  "def": "Use time itself as material",
+  "do": "Sustain it until the length itself changes what it is.",
+  "cat": "TIME",
+  "obj": "process",
+  "z": "Liminal",
+  "xy": [
+   5.0,
+   4.0
+  ]
+ },
+ "SAMPLE": {
+  "no": "113",
+  "def": "Lift a fragment into a new whole",
+  "do": "Build the new thing around the found piece.",
+  "cat": "STRUCTURE",
+  "obj": "material in hand",
+  "z": "Determinate",
+  "xy": [
+   2.0,
+   4.0
+  ]
+ },
+ "SATURATE": {
+  "no": "64",
+  "def": "Flood a sensory channel past its processing capacity",
+  "do": "Flood one channel past capacity — and keep flooding.",
+  "cat": "PERCEPTION",
+  "obj": "attention",
+  "z": "Liminal",
+  "xy": [
+   5.0,
+   4.0
+  ]
+ },
+ "SCAFFOLD": {
+  "no": "128",
+  "def": "Put in a support only so the work can be made; take it out before the end",
+  "do": "Add a support only for the making; take it out before the end; the work stands or falls.",
+  "cat": "STRUCTURE",
+  "obj": "structure of the artefact; material in hand",
+  "z": "Determinate",
+  "xy": [
+   3.0,
+   2.0
+  ]
+ },
+ "STRIP": {
+  "no": "1",
+  "def": "Remove until structure appears",
+  "do": "Remove one thing at a time; stop when the next removal would break it.",
+  "cat": "MATERIAL",
+  "obj": "material in hand; structure of the artefact",
+  "z": "Determinate",
+  "xy": [
+   2.0,
+   1.0
+  ]
+ },
+ "SUBSTITUTE": {
+  "no": "142",
+  "def": "Put B where A was; keep A's place, role and links",
+  "do": "Swap the occupant by a stated rule; keep its place, role and links.",
+  "cat": "STRUCTURE",
+  "obj": "language; structure of the artefact",
+  "z": "Indeterminate",
+  "xy": [
+   1.0,
+   4.0
+  ]
+ },
+ "SUSPEND THE RULES": {
+  "no": "33",
+  "def": "Create conditions where normal rules suspend",
+  "do": "Mark an edge in and an edge out, and suspend the ordinary rules only between them; they return at the edge out.",
+  "cat": "RELATIONSHIP",
+  "obj": "frame; social arrangement",
+  "z": "Liminal",
+  "xy": [
+   2.0,
+   5.0
+  ]
+ },
+ "TRACE": {
+  "no": "16",
+  "def": "Follow transformation through time",
+  "do": "Follow the changes back link by link, on evidence only; stop where the evidence runs out, not where the story would.",
+  "cat": "PROCESS",
+  "obj": "process",
+  "z": "Determinate",
+  "xy": [
+   4.0,
+   2.0
+  ]
+ },
+ "TRANSLATE": {
+  "no": "4",
+  "def": "Move material across media without adapting it",
+  "do": "Carry it into the new medium without adapting it; keep every loss, and stop when the whole has crossed.",
+  "cat": "MATERIAL",
+  "obj": "material in hand",
+  "z": "Indeterminate",
+  "xy": [
+   2.0,
+   5.0
+  ]
+ },
+ "TRIANGULATE": {
+  "no": "40",
+  "def": "Converge from three independent positions",
+  "do": "Come at it three ways that share no source; keep only what all three agree on.",
+  "cat": "KNOWLEDGE",
+  "obj": "process",
+  "z": "Determinate",
+  "xy": [
+   2.0,
+   1.0
+  ]
+ }
+}

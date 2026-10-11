@@ -1,0 +1,275 @@
+{
+ "note": "The 30 tasks Supermenu recommends, with the chain of operations each one carries (from the Personal Inventory deck, as of 2026-10-11). Edit freely: this copy is Supermenu's own.",
+ "tasks": [
+  {
+   "n": 1,
+   "en": "Write down every address you have lived at.",
+   "es": "Anota todas las direcciones donde has vivido.",
+   "chain": [
+    "EXHAUST",
+    "LOCATE"
+   ]
+  },
+  {
+   "n": 2,
+   "en": "Make a list of every job you have had.",
+   "es": "Haz una lista de todos los trabajos que has tenido.",
+   "chain": [
+    "EXHAUST",
+    "CLASSIFY"
+   ]
+  },
+  {
+   "n": 3,
+   "en": "Draw a plan of a house you lived in years ago. Include the furniture.",
+   "es": "Dibuja un esquema de una casa en la que viviste hace años. Incluye muebles.",
+   "chain": [
+    "ELICIT",
+    "CONTAIN"
+   ]
+  },
+  {
+   "n": 4,
+   "en": "Make a list of every bed you remember sleeping in.",
+   "es": "Haz una lista de todas las camas en las que recuerdas haber dormido.",
+   "chain": [
+    "EXHAUST",
+    "MARK TIME"
+   ]
+  },
+  {
+   "n": 5,
+   "en": "Write down every present you remember getting before you turned ten.",
+   "es": "Anota todos los regalos que recuerdes haber recibido antes de cumplir 10 años.",
+   "chain": [
+    "ELICIT",
+    "ACCUMULATE"
+   ]
+  },
+  {
+   "n": 6,
+   "en": "Describe a meal you will never forget, in great detail.",
+   "es": "Describe con lujo de detalle una comida inolvidable.",
+   "chain": [
+    "SATURATE",
+    "NAME"
+   ]
+  },
+  {
+   "n": 7,
+   "en": "Make a list of every school, course, institution or club you have been part of.",
+   "es": "Haz una lista de cada escuela, curso, institución, o club del que has sido parte.",
+   "chain": [
+    "CLASSIFY",
+    "EXHAUST"
+   ]
+  },
+  {
+   "n": 8,
+   "en": "Draw or describe the object you have carried with you for longest.",
+   "es": "Dibuja o describe el objeto que has llevado contigo durante más tiempo.",
+   "chain": [
+    "RUN IT LONG",
+    "FOREGROUND"
+   ]
+  },
+  {
+   "n": 9,
+   "en": "Make a list or a diagram of every haircut you remember having.",
+   "es": "Haz una lista o diagrama de todos los cortes de pelo que recuerdes haber tenido.",
+   "chain": [
+    "MARK TIME",
+    "DIFFER FROM EACH"
+   ]
+  },
+  {
+   "n": 10,
+   "en": "Describe or draw the view from a window you can no longer see.",
+   "es": "Describe o dibuja la vista desde una ventana que ya no puedas ver.",
+   "chain": [
+    "REFRAME",
+    "ELICIT"
+   ]
+  },
+  {
+   "n": 11,
+   "en": "Make a detailed drawing of a place you have visited only once.",
+   "es": "Haz un dibujo detallado de un lugar que hayas visitado una sola vez.",
+   "chain": [
+    "ATTEND",
+    "LOCATE"
+   ]
+  },
+  {
+   "n": 12,
+   "en": "Make a list of the nicknames you have been given.",
+   "es": "Haz una lista de apodos que te han dado.",
+   "chain": [
+    "NAME",
+    "ACCUMULATE"
+   ]
+  },
+  {
+   "n": 13,
+   "en": "Draw something you lost and never found.",
+   "es": "Dibuja algo que hayas perdido y nunca encontrado.",
+   "chain": [
+    "CONCEAL",
+    "ELICIT"
+   ]
+  },
+  {
+   "n": 14,
+   "en": "Make a list of notable things you have assembled, built or cooked.",
+   "es": "Haz una lista de cosas notables que hayas armado, construido o cocinado.",
+   "chain": [
+    "ACCUMULATE",
+    "RANK"
+   ]
+  },
+  {
+   "n": 15,
+   "en": "Write down every animal you have loved.",
+   "es": "Anota cada animal que hayas querido.",
+   "chain": [
+    "NAME",
+    "EXHAUST"
+   ]
+  },
+  {
+   "n": 16,
+   "en": "Make a playlist of songs to sing at the top of your lungs.",
+   "es": "Haz una playlist de canciones para cantar a todo pulmón.",
+   "chain": [
+    "SATURATE",
+    "SAMPLE"
+   ]
+  },
+  {
+   "n": 17,
+   "en": "Day by day, rebuild the itinerary of a trip you will never forget.",
+   "es": "Día por día, reconstruye el itinerario de un viaje inolvidable.",
+   "chain": [
+    "TRACE",
+    "MARK TIME"
+   ]
+  },
+  {
+   "n": 18,
+   "en": "Write down the name of everyone you have kissed romantically.",
+   "es": "Anota el nombre de cada persona a la que hayas besado amorosamente.",
+   "chain": [
+    "NAME",
+    "EXHAUST"
+   ]
+  },
+  {
+   "n": 19,
+   "en": "Make a list of all the friendships you miss.",
+   "es": "Haz una lista de todas las amistades que eches de menos.",
+   "chain": [
+    "END WHILE IT WORKS",
+    "NAME"
+   ]
+  },
+  {
+   "n": 20,
+   "en": "Describe the most epic party you have been to.",
+   "es": "Describe la fiesta más épica a la que hayas ido.",
+   "chain": [
+    "EXAGGERATE",
+    "ELICIT"
+   ]
+  },
+  {
+   "n": 21,
+   "en": "Write down your favourite drinks over the years. Make one today.",
+   "es": "Anota tus bebidas favoritas a lo largo de los años. Prepara una hoy.",
+   "chain": [
+    "MARK TIME",
+    "REPLICATE"
+   ]
+  },
+  {
+   "n": 22,
+   "en": "Make a list of people who left a mark on you, for better and for worse.",
+   "es": "Haz una lista de personas que te dejaron huella para bien y para mal.",
+   "chain": [
+    "BUILD ON THE MARKS",
+    "RANK"
+   ]
+  },
+  {
+   "n": 23,
+   "en": "Draw a series of tattoos you would definitely never get. Get one?",
+   "es": "Dibuja una serie de tatuajes que definitivamente nunca te tatuarías. ¿Tatúate uno?",
+   "chain": [
+    "EXAGGERATE",
+    "RAISE THE COST"
+   ]
+  },
+  {
+   "n": 24,
+   "en": "Write down the names of people who have helped you.",
+   "es": "Escribe el nombre de personas que te hayan ayudado.",
+   "chain": [
+    "NAME",
+    "EXCHANGE"
+   ]
+  },
+  {
+   "n": 25,
+   "en": "Draw a sketch map to a place you like.",
+   "es": "Dibuja un croquis para ir a un lugar que te gusta.",
+   "chain": [
+    "LOCATE",
+    "TRANSLATE"
+   ]
+  },
+  {
+   "n": 26,
+   "en": "Write down every scar you remember and how you got it. Optional: draw them.",
+   "es": "Anota cada cicatriz que recuerdes y cómo llegó. Opcional: dibújalas.",
+   "chain": [
+    "MARK TIME",
+    "TRACE"
+   ]
+  },
+  {
+   "n": 27,
+   "en": "Write down things you learned to do because someone taught you. Include who.",
+   "es": "Anota cosas que aprendiste a hacer porque alguien te las enseñó. Incluye quién.",
+   "chain": [
+    "EXECUTE",
+    "HAND OVER"
+   ]
+  },
+  {
+   "n": 28,
+   "en": "Make a list of smells or tastes that take you to a specific place or moment.",
+   "es": "Haz una lista de olores o sabores que te sitúan en un lugar o momento específico.",
+   "chain": [
+    "SATURATE",
+    "RELOCATE"
+   ]
+  },
+  {
+   "n": 29,
+   "en": "Describe or draw something you witnessed and have never been able to explain to anyone.",
+   "es": "Describe o dibuja algo que presenciaste y que nunca has podido explicarle a nadie.",
+   "chain": [
+    "READ THE INTERFERENCE",
+    "TRANSLATE"
+   ]
+  },
+  {
+   "n": 30,
+   "en": "Write something you know that nobody else knows.",
+   "es": "Escribe algo que sabes y que nadie más sabe.",
+   "chain": [
+    "CONCEAL",
+    "OCCUPY"
+   ]
+  }
+ ]
+}
