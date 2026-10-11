@@ -4,7 +4,7 @@
     python3 research/cutout.py               # uses research/large/ where a picture is there, else the small copy
     python3 research/cutout.py --small       # small copies only (a quick preview)
 
-Needs Pillow and rembg (pip3 install "rembg[cpu]"); the first run downloads the cutting model (about 180 MB).
+Needs Pillow, scipy and rembg (pip3 install "rembg[cpu]" scipy); the first run downloads the cutting model (about 180 MB).
 Writes research/cutouts/<name>.webp and research/cutouts.html, a check page: each original beside its cut-out,
 numbered, on the case's pink. Nothing goes into source/ until the cut-outs are accepted.
 """
@@ -15,6 +15,8 @@ HERE = pathlib.Path(__file__).resolve().parent
 OUT = HERE / 'cutouts'
 HEIGHT = 300          # every object in source/objects is 300 px tall
 MODEL = 'isnet-general-use'
+# Pictures whose cut-out keeps a haze (a string, a shadow): only solid parts are kept.
+STRICT = {'europeana-91619_SMVK_EM_objekt_1559850'}
 
 
 def harden(alpha):
@@ -22,10 +24,27 @@ def harden(alpha):
     return alpha.point(lambda a: 0 if a < 30 else 255 if a > 225 else int((a - 30) * 255 / 195))
 
 
-def cut(im, session):
+def specks(a, share=0.01):
+    """Removes small separate bits (museum labels, numbers, dust): anything under 1% of the largest part."""
+    import numpy as np
+    from scipy import ndimage
+    arr = np.array(a)
+    lab, n = ndimage.label(arr > 40)
+    if n < 2:
+        return a
+    sizes = ndimage.sum(np.ones_like(arr), lab, range(1, n + 1))
+    keep = np.isin(lab, [i + 1 for i, s in enumerate(sizes) if s >= share * sizes.max()])
+    arr[~keep] = 0
+    return Image.fromarray(arr)
+
+
+def cut(im, session, strict=False):
     from rembg import remove
     rgba = remove(im.convert('RGB'), session=session)
     a = harden(rgba.getchannel('A'))
+    if strict:
+        a = a.point(lambda v: 255 if v > 200 else 0).filter(ImageFilter.GaussianBlur(0.6))
+    a = specks(a, 0.08 if strict else 0.01)
     box = a.point(lambda v: 255 if v > 8 else 0).getbbox()
     if not box:
         return None
@@ -59,7 +78,7 @@ def main():
         src = HERE / r['file'] if a.small or not big.exists() else big
         dest = OUT / (stem + '.webp')
         if not a.only or stem in a.only.split(','):
-            res = cut(Image.open(src), session)
+            res = cut(Image.open(src), session, stem in STRICT)
             if not res:
                 print(f'{n:3d} {stem}: nothing found'); continue
             img, size = res
