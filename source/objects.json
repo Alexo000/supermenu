@@ -1,27 +1,29 @@
 {
- "note": "Supermenu's own objects (copied from the COSMORAMA Supermenu cut-outs on 2026-10-11). Only objects with an op appear in the case. 'why' is for the author, never shown. Fill title and credit before a wider launch.",
+ "note": "Supermenu's own objects (copied from the COSMORAMA Supermenu cut-outs on 2026-10-11). Only objects with an op appear in the case. 'why' is for the author, never shown. Fill title and credit before a wider launch. 'excluded' marks the 57 cut-outs kept out (modern artworks and designs, machines, human remains, portraits of real people).",
  "objects": [
   {
    "id": 1,
    "file": "objects/001.webp",
    "width": 138,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "SAMPLE",
+   "why": "a head lifted into a whole of its own",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 28",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 2,
    "file": "objects/002.webp",
    "width": 155,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "EXHAUST",
+   "why": "covered completely in writing",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 25",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 3,
@@ -32,18 +34,20 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 61",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 4,
    "file": "objects/004.webp",
    "width": 81,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "REPLICATE",
+   "why": "a figure moulded in series",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 17",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 5,
@@ -54,7 +58,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 11",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 6,
@@ -65,7 +70,8 @@
    "why": "the figure that works for you",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 26",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 7,
@@ -76,40 +82,44 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 23",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 8,
    "file": "objects/008.webp",
    "width": 81,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "CONSTRAIN",
+   "why": "arms held in, nothing may stick out",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 13",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 9,
    "file": "objects/009.webp",
    "width": 81,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "EXCHANGE",
+   "why": "brings something to pass on",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 14",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 10,
    "file": "objects/010.webp",
    "width": 98,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "MARK TIME",
+   "why": "weathering shows the years",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 24",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 11,
@@ -120,40 +130,44 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 62",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 12,
    "file": "objects/012.webp",
    "width": 147,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "GRAFT",
+   "why": "a jar joined to a bird",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 27",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 13,
    "file": "objects/013.webp",
    "width": 202,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "EXAGGERATE",
+   "why": "a face that takes over the vessel",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 12",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 14,
    "file": "objects/014.webp",
    "width": 116,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "DIFFER FROM EACH",
+   "why": "no part matches another",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 20",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 15,
@@ -164,7 +178,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 30",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 16,
@@ -175,7 +190,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 36",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 17,
@@ -186,7 +202,8 @@
    "why": "one of many, made the same",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 63",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 18,
@@ -197,7 +214,8 @@
    "why": "nested weights: I, B, C",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 18",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 19,
@@ -208,7 +226,8 @@
    "why": "each tier smaller than the last",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 60",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 20,
@@ -219,29 +238,32 @@
    "why": "one body held between two",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 29",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 21,
    "file": "objects/021.webp",
    "width": 94,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "ELICIT",
+   "why": "a figure made to call something out",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 9",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 22,
    "file": "objects/022.webp",
    "width": 72,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "SUSPEND THE RULES",
+   "why": "hand raised: fear not",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 8",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 23,
@@ -252,18 +274,20 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 34",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 24,
    "file": "objects/024.webp",
    "width": 89,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "ITERATE",
+   "why": "the same figure, made again from the last",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 7",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 25,
@@ -274,18 +298,20 @@
    "why": "a body held at full length",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 58",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 26,
    "file": "objects/026.webp",
    "width": 92,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "DEPRIVE",
+   "why": "the face covered over",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 10",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 27,
@@ -296,7 +322,8 @@
    "why": "discs stacked, none removed",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 21",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 28,
@@ -307,18 +334,20 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 22",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 29,
    "file": "objects/029.webp",
    "width": 118,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "RITUALISE",
+   "why": "the standing figure, repeated for centuries",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 64",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 30,
@@ -329,7 +358,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 40",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 31,
@@ -340,7 +370,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 38",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 32,
@@ -351,29 +382,32 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 31",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 33,
    "file": "objects/033.webp",
    "width": 128,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "FOREGROUND",
+   "why": "the base swallows the figure",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 19",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 34,
    "file": "objects/034.webp",
    "width": 249,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "GENERALISE",
+   "why": "a figure turned into a diagram",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 16",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 35,
@@ -384,18 +418,20 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 66",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 36,
    "file": "objects/036.webp",
    "width": 205,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "ATTEND",
+   "why": "sits at ease and watches",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 5",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 37,
@@ -406,7 +442,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 33",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 38,
@@ -417,7 +454,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 39",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 39,
@@ -428,7 +466,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 65",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 40,
@@ -439,18 +478,20 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 56",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 41,
    "file": "objects/041.webp",
    "width": 206,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "OCCUPY",
+   "why": "settled into its seat",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 6",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 42,
@@ -461,7 +502,8 @@
    "why": "doors close over the cross",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 67",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 43,
@@ -472,7 +514,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 46",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 44,
@@ -483,18 +526,20 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G1.psd, Layer 35",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 45,
    "file": "objects/045.webp",
    "width": 154,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "MIMIC",
+   "why": "a mask that passes as a face",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 3",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 46,
@@ -505,18 +550,20 @@
    "why": "a hand on its own, given away",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 11",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 47,
    "file": "objects/047.webp",
    "width": 158,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "READ THE INTERFERENCE",
+   "why": "cracks running across the painting",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 25",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 48,
@@ -527,29 +574,32 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 39",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 49,
    "file": "objects/049.webp",
    "width": 143,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "ALTERNATE",
+   "why": "ring, plate, ring",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 20",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 50,
    "file": "objects/050.webp",
    "width": 204,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "RANK",
+   "why": "spires in order of height",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 45",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 51,
@@ -560,18 +610,20 @@
    "why": "relief packed past capacity",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 18",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 52,
    "file": "objects/052.webp",
    "width": 101,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "RAISE THE COST",
+   "why": "the higher the seat, the harder to reach",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 6",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 53,
@@ -582,40 +634,44 @@
    "why": "a jar that keeps what is inside",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 27",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 54,
    "file": "objects/054.webp",
    "width": 132,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "JUXTAPOSE",
+   "why": "scenes side by side, no caption",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 24",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 55,
    "file": "objects/055.webp",
    "width": 195,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "TRANSLATE",
+   "why": "a stage pose carried into print",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 17",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 56,
    "file": "objects/056.webp",
    "width": 186,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "STRIP",
+   "why": "only the head left",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 10",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 57,
@@ -626,7 +682,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 37",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 58,
@@ -637,7 +694,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 40",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 59,
@@ -648,18 +706,20 @@
    "why": "everything on one centre line",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 22",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 60,
    "file": "objects/060.webp",
    "width": 132,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "EXECUTE",
+   "why": "someone else finished it: feet restored",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 21",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 61,
@@ -670,40 +730,44 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 12",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 62,
    "file": "objects/062.webp",
    "width": 82,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "CONTAIN",
+   "why": "a coffin shaped like what it holds",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 13",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 63,
    "file": "objects/063.webp",
    "width": 197,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "ELICIT",
+   "why": "a laugh that draws one out",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 50",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 64,
    "file": "objects/064.webp",
    "width": 176,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "REPLICATE",
+   "why": "a copy of a copy",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 30",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 65,
@@ -714,7 +778,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 47",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 66,
@@ -725,29 +790,32 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 48",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 67,
    "file": "objects/067.webp",
    "width": 99,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "DELEGATE",
+   "why": "a stand-in that works for you",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 28",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 68,
    "file": "objects/068.webp",
    "width": 187,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "MORPH",
+   "why": "one face changing into another style",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 5",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 69,
@@ -758,7 +826,8 @@
    "why": "label ends in a question mark",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 29",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 70,
@@ -769,18 +838,20 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 42",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 71,
    "file": "objects/071.webp",
    "width": 107,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "LAY OVER",
+   "why": "tier laid on tier, each whole",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 7",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 72,
@@ -791,7 +862,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 43",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 73,
@@ -802,29 +874,32 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 36",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 74,
    "file": "objects/074.webp",
    "width": 192,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "DEPRIVE",
+   "why": "eyes closed",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 9",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 75,
    "file": "objects/075.webp",
    "width": 300,
    "height": 166,
-   "op": null,
-   "why": "",
+   "op": "CONCEAL",
+   "why": "a closed box",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 2",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 76,
@@ -835,62 +910,68 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 38",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 77,
    "file": "objects/077.webp",
    "width": 160,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "SATURATE",
+   "why": "a crown heaped past capacity",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 8",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 78,
    "file": "objects/078.webp",
    "width": 150,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "FEED BACK",
+   "why": "a line that comes back round",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 32",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 79,
    "file": "objects/079.webp",
    "width": 183,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "STRIP",
+   "why": "a face cut down to its signs",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 16",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 80,
    "file": "objects/080.webp",
    "width": 137,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "DEGRADE",
+   "why": "worn until the figure almost goes",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 19",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 81,
    "file": "objects/081.webp",
    "width": 140,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "GRAFT",
+   "why": "a helmet grown onto a head",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 26",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 82,
@@ -901,7 +982,8 @@
    "why": "saints sorted into niches",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 15",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 83,
@@ -912,7 +994,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 44",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 84,
@@ -923,7 +1006,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 35",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 85,
@@ -934,7 +1018,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G2.psd, Layer 31",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 86,
@@ -945,29 +1030,32 @@
    "why": "worn down until it stops",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 21",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 87,
    "file": "objects/087.webp",
    "width": 184,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "BUILD ON THE MARKS",
+   "why": "drawn from what was left",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 46",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 88,
    "file": "objects/088.webp",
    "width": 182,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "OCCUPY",
+   "why": "set around the mound and left there",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 54",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 89,
@@ -978,7 +1066,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 59",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 90,
@@ -989,7 +1078,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 44",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 91,
@@ -1000,7 +1090,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 42",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 92,
@@ -1011,7 +1102,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 45",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 93,
@@ -1022,18 +1114,20 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 47",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 94,
    "file": "objects/094.webp",
    "width": 188,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "CONTAIN",
+   "why": "a figure held in petals",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 29",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 95,
@@ -1044,7 +1138,8 @@
    "why": "moved untouched onto a plinth",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 32",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 96,
@@ -1055,7 +1150,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 38",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 97,
@@ -1066,7 +1162,8 @@
    "why": "a figure carried into print",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 13",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 98,
@@ -1077,7 +1174,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 2",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 99,
@@ -1088,29 +1186,32 @@
    "why": "busts set on a coffin, no caption",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 22",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 100,
    "file": "objects/100.webp",
    "width": 99,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "REPLICATE",
+   "why": "the standing figure, made again",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 8",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 101,
    "file": "objects/101.webp",
    "width": 111,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "DIFFER FROM EACH",
+   "why": "each fold different",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 4",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 102,
@@ -1121,7 +1222,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 49",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 103,
@@ -1132,40 +1234,44 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 35",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 104,
    "file": "objects/104.webp",
    "width": 125,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "ITERATE",
+   "why": "the robe flared, then flared again",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 7",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 105,
    "file": "objects/105.webp",
    "width": 272,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "RITUALISE",
+   "why": "a vessel made for a repeated rite",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 26",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 106,
    "file": "objects/106.webp",
    "width": 90,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "LAY OVER",
+   "why": "painted layer over layer",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 15",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 107,
@@ -1176,29 +1282,32 @@
    "why": "a seal: a name cut in the round",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 17",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 108,
    "file": "objects/108.webp",
    "width": 112,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "SAMPLE",
+   "why": "a scene lifted onto a pot",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 28",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 109,
    "file": "objects/109.webp",
    "width": 213,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "MIMIC",
+   "why": "an animal passing as a bird",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 30",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 110,
@@ -1209,18 +1318,20 @@
    "why": "a stake that marks here",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 31",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 111,
    "file": "objects/111.webp",
    "width": 124,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "LOCATE",
+   "why": "raised onto a stepped base",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 10",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 112,
@@ -1231,29 +1342,32 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 56",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 113,
    "file": "objects/113.webp",
    "width": 108,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "DIFFER FROM EACH",
+   "why": "three figures, each a little different",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 25",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 114,
    "file": "objects/114.webp",
    "width": 244,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "END WHILE IT WORKS",
+   "why": "the dance before the end",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 14",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 115,
@@ -1264,29 +1378,32 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 61",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 116,
    "file": "objects/116.webp",
    "width": 199,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "COUPLE",
+   "why": "two bodies tied, each moves the other",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 34",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 117,
    "file": "objects/117.webp",
    "width": 82,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "EXHAUST",
+   "why": "every register filled",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 58",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 118,
@@ -1297,7 +1414,8 @@
    "why": "a head too big for its body",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 19",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 119,
@@ -1308,29 +1426,32 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 36",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 120,
    "file": "objects/120.webp",
    "width": 250,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "ATTEND",
+   "why": "a worshipper left to keep watching",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 3",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 121,
    "file": "objects/121.webp",
    "width": 242,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "MARK TIME",
+   "why": "the surface keeps the years",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 9",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 122,
@@ -1341,7 +1462,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 37",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 123,
@@ -1352,7 +1474,8 @@
    "why": "heads joined onto a head",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 27",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 124,
@@ -1363,18 +1486,20 @@
    "why": "figures repeated round a centre",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 23",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 125,
    "file": "objects/125.webp",
    "width": 170,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "RANK",
+   "why": "a crown that shows its place",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 6",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 126,
@@ -1385,40 +1510,44 @@
    "why": "the head swapped for a box",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 20",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 127,
    "file": "objects/127.webp",
    "width": 199,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "RELOCATE",
+   "why": "a head moved onto a stand",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 12",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 128,
    "file": "objects/128.webp",
    "width": 246,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "FIND THE THRESHOLD",
+   "why": "cracked to the point it changes",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 11",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 129,
    "file": "objects/129.webp",
    "width": 174,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "CONCEAL",
+   "why": "a gold head that holds something unseen",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 52",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 130,
@@ -1429,18 +1558,20 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 48",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 131,
    "file": "objects/131.webp",
    "width": 247,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "ACCUMULATE",
+   "why": "lumps added, none removed",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 53",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 132,
@@ -1451,18 +1582,20 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 60",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 133,
    "file": "objects/133.webp",
    "width": 262,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "MIMIC",
+   "why": "a seed passing as a body",
    "source": "COSMORAMA Supermenu, G3.psd, Layer 50",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 134,
@@ -1473,7 +1606,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 55",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 135,
@@ -1484,18 +1618,20 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 47",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 136,
    "file": "objects/136.webp",
    "width": 142,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "SCAFFOLD",
+   "why": "a figure held up by its frame of leaves",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 48",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 137,
@@ -1506,18 +1642,20 @@
    "why": "one field, two rules",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 54",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 138,
    "file": "objects/138.webp",
    "width": 177,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "SUBSTITUTE",
+   "why": "a painted face where the face was",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 31",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 139,
@@ -1528,7 +1666,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 49",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 140,
@@ -1539,7 +1678,8 @@
    "why": "sits and watches, takes nothing",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 33",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 141,
@@ -1550,7 +1690,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 53",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 142,
@@ -1561,7 +1702,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 32",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 143,
@@ -1572,7 +1714,8 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 43",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 144,
@@ -1583,18 +1726,20 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 46",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 145,
    "file": "objects/145.webp",
    "width": 107,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "HAND OVER",
+   "why": "holding the shrine out",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 34",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 146,
@@ -1605,7 +1750,8 @@
    "why": "three bodies, one meeting point",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 38",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 147,
@@ -1616,7 +1762,8 @@
    "why": "takes the seat and stays",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 44",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 148,
@@ -1627,18 +1774,20 @@
    "why": "armour left, the rest gone",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 39",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 149,
    "file": "objects/149.webp",
    "width": 238,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "REFRAME",
+   "why": "only the face, the edge moved",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 51",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 150,
@@ -1649,18 +1798,20 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 35",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 151,
    "file": "objects/151.webp",
    "width": 106,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "DELEGATE",
+   "why": "a figure that acts for someone",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 36",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 152,
@@ -1671,18 +1822,20 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 45",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 153,
    "file": "objects/153.webp",
    "width": 112,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "EXAGGERATE",
+   "why": "a comic face pushed too far",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 37",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 154,
@@ -1693,18 +1846,20 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 40",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 155,
    "file": "objects/155.webp",
    "width": 124,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "MARK TIME",
+   "why": "worn paint keeps the years",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 42",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   },
   {
    "id": 156,
@@ -1715,18 +1870,20 @@
    "why": "",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 41",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": true
   },
   {
    "id": 157,
    "file": "objects/157.webp",
    "width": 217,
    "height": 300,
-   "op": null,
-   "why": "",
+   "op": "ALIGN",
+   "why": "everything on two crossing lines",
    "source": "COSMORAMA Supermenu, G4.psd, Layer 52",
    "title": "",
-   "credit": ""
+   "credit": "",
+   "excluded": false
   }
  ]
 }

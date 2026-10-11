@@ -1,33 +1,41 @@
 # Supermenu
 
-Pick three objects from a case of twelve; the page answers with one task, laid out as an A4 sheet to do the
-task on, tick (Done / Not for me) and, if wanted, photograph with #supermenuARS. Each sheet carries a code
-(SM- and four characters) that records the three objects and the task.
+Two ways in:
+- **The case**: twelve objects drawn at random; pick three; the page answers with one task.
+- **Full view** (`#full` opens it directly): all the objects; pick six, nine or twelve; the page reads them in
+  threes, in the order picked, and gives each three its closest task that no other three has taken.
+
+Each task comes as an A4 sheet to do it on, tick (Done / Not for me) and, if wanted, photograph with
+#supermenuARS. Each sheet carries a code that records its three objects and its task.
 
 Supermenu stands on its own. It shares no files with the game (Shubyrinth): its objects, tasks and
 operations are its own copies, made on 2026-10-11, and can change without touching the game, or the other way round.
 
 ## Files
 
-- `source/objects.json` and `source/objects/` hold the 157 cut-out objects. An object appears in the case
-  only when it has an `op` (29 do now). `why` is a note for you; `title` and `credit` are for the credits.
+- `source/objects.json` and `source/objects/` hold the 157 cut-out objects. An object appears only when it has
+  an `op` (100 do). `excluded: true` marks the 57 kept out: modern artworks and designs, machines, human remains,
+  portraits of real people. `why` is a note for you; `title` and `credit` are for the credits.
 - `source/tasks.json` holds the 30 tasks (English and Spanish) and the chain of operations each carries.
 - `source/operations.json` holds the operations, with their place on the map (`xy`) and family (`cat`),
   which the engine uses to find the closest task.
+- `source/codes.json` holds the code versions (see below). Never edit or remove a version.
 - `template.html` is the page; `codec.js` makes and reads the sheet codes; `decoder_template.html` is the decoder.
 - `python3 build.py` rebuilds everything below after any change. It stops and says what is wrong if an
   object or task names an operation it does not know.
 - `site/index.html` is the whole page, ready for Netlify: drag the `site` folder onto the site's Deploys page.
-- `decoder.html` reads the code on a returned sheet: the three objects in the order picked and the task.
-  For you only, as it names the operations; it is not part of `site`. Open it from disk.
+- `decoder.html` reads the codes on returned sheets: the three objects and the task. For you only, as it names
+  the operations; it is not part of `site`. Open it from disk.
 - `embed.html` is the snippet for a Squarespace Code block: the page sets its own height on the host page
-  (no inner scroll bar on phones) and scrolls it to the sheet. Printing from inside the embed opens the sheet
-  in its own tab (`?print#SM-XXXX`) and prints there.
+  (no inner scroll bar on phones) and scrolls it to the sheets. Printing from inside the embed opens the sheets
+  in their own tab (`?print#CODE.CODE`) and prints there, one sheet per page.
 
 ## Codes
 
-Codes depend on which objects are in the case and on the tasks. Adding, removing or reordering either
-changes what new codes mean, and old sheets would decode wrongly. When that happens, move to `SM2-` codes
-(see `codec.js`) so both versions can be read.
+Each version of the code counts against a fixed list of objects and tasks, so printed sheets always read back.
+- `SM-` and four characters: the first 29 objects, three in the order picked (10 October 2026).
+- `SM2-` and five characters: the 100 objects, three kept as a set (11 October 2026).
+When the objects or tasks change, `build.py` adds the next version (`SM3-`, …) by itself and says so.
 
-Nothing a visitor picks is stored. Before a wider launch: full credits for each object (museum, object, licence).
+Nothing a visitor picks is stored. Before a wider launch: full credits for each object (museum, object, licence),
+or replacement by open-licence images (see the archive search plan).

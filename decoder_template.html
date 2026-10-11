@@ -29,7 +29,7 @@ textarea:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
 </style>
 <div class="wrap">
   <h1>Supermenu decoder</h1>
-  <p>Type or paste the code from a returned sheet, one per line. Each code gives back the three objects in the order they were picked and the task the sheet carried. For you only: it names the operations.</p>
+  <p>Type or paste the codes from returned sheets, one per line (or the dot-joined list from a printed set). Each code gives back the three objects in the order they were picked and the task the sheet carried. For you only: it names the operations.</p>
   <div><label for="codes">Codes</label><textarea id="codes" spellcheck="false" autocomplete="off">__SAMPLE__</textarea></div>
   <div class="list" id="list" aria-live="polite"></div>
 </div>
@@ -38,22 +38,22 @@ textarea:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
 (()=>{
 const D=JSON.parse(document.getElementById('data').textContent);
 /*__CODEC__*/
-const OBJ=Object.fromEntries(D.objects.map(o=>[o.id,o])),TASK=Object.fromEntries(D.tasks.map(t=>[t.n,t]));
+const OBJ=Object.fromEntries([...(D.archive||[]),...D.objects].map(o=>[o.id,o])),TASK=Object.fromEntries(D.tasks.map(t=>[t.n,t]));
 const pad=n=>String(n).padStart(3,'0');
 function el(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
 function show(){
   const list=document.getElementById('list');list.textContent='';
-  const codes=document.getElementById('codes').value.split(/[\s,;]+/).filter(Boolean);
+  const codes=document.getElementById('codes').value.split(/[\s,;.]+/).filter(Boolean);
   for(const code of codes){
     const card=el('article','card'),r=decodeSheet(code);
     card.append(el('div','code'+(r?'':' bad'),code.toUpperCase()));
     const body=el('div');
-    if(!r){body.append(el('p','bad','Not a Supermenu code. Codes look like SM-K7QD: four characters, no O, I, L, 0 or 1.'))}
+    if(!r){body.append(el('p','bad','Not a Supermenu code. Codes look like SM2-K7QD3 (or SM-K7QD on the first sheets): no O, I, L, 0 or 1.'))}
     else{
       const objs=el('div','objs');
-      for(const id of r.objects){const o=OBJ[id],f=el('figure'),img=el('img');img.src=o.img;img.alt='Object '+pad(id);f.append(img,el('figcaption',null,pad(id)+'\n'+o.op));objs.append(f)}
+      for(const id of r.objects){const o=OBJ[id],f=el('figure'),img=el('img');img.src=o.img;img.alt='Object '+pad(id);f.append(img,el('figcaption',null,pad(id)+'\n'+(o.op||'(no operation now)')));objs.append(f)}
       const t=TASK[r.task];
-      body.append(objs,el('p','task','Task '+t.n+': '+t.en),el('p','es',t.es),el('p','ops','Task chain: '+t.chain.join(' · ')));
+      body.append(el('p','ops',r.version==='SM-'?'First version: objects in the order picked':'Objects as a set (order not kept)'),objs,el('p','task','Task '+t.n+': '+t.en),el('p','es',t.es),el('p','ops','Task chain: '+t.chain.join(' · ')));
       body.style.display='grid';body.style.gap='8px';
     }
     card.append(body);list.append(card);

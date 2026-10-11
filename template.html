@@ -3,7 +3,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=Inter:wght@400;500;600&display=swap">
 <style>
-/* Layout: a pink vitrine of numbered objects, a tray of three, and the answer as an A4 sheet.
+/* Layout: a pink vitrine of numbered objects (a case of twelve, or the full view of all of them),
+   a tray, and the answer as one or more A4 sheets.
    One visual world (the series colours), so a single light theme, every colour set explicitly. */
 :root{
   --ground:#FFFFFF;      /* page */
@@ -22,38 +23,50 @@
 html,body{background:var(--ground);color:var(--ink)}
 body{font-family:var(--f-text);font-size:15px;line-height:1.5}
 .wrap>*{min-width:0}
-.wrap{max-width:1040px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:28px}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:24px}
 header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px}
 h1{font-family:var(--f-num);font-weight:400;font-size:clamp(48px,9vw,84px);line-height:.85;margin:0;letter-spacing:.01em}
-.lede{margin:8px 0 0;max-width:40ch;color:var(--ink)}
-.lang{display:flex;gap:4px;font-family:var(--f-num);font-size:20px}
-.lang button{background:none;border:1px solid var(--rule);color:var(--soft);padding:2px 10px;cursor:pointer;font:inherit}
-.lang button[aria-pressed="true"]{border-color:var(--ink);color:var(--ink)}
+.lede{margin:8px 0 0;max-width:44ch;color:var(--ink)}
+.toggles{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+.seg{display:flex;gap:4px;font-family:var(--f-num);font-size:20px}
+.seg button{background:none;border:1px solid var(--rule);color:var(--soft);padding:2px 10px;cursor:pointer;font:inherit;line-height:1.3}
+.seg button[aria-pressed="true"]{border-color:var(--ink);color:var(--ink)}
+.seg button:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
 
 /* the vitrine */
 .case{background:var(--case);padding:14px;display:grid;gap:10px}
 .case-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:var(--f-num);font-size:20px;line-height:1}
 .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
 @media (max-width:640px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.grid.full{grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:2px}
 .obj{position:relative;aspect-ratio:3/4;max-width:100%;border:1px solid transparent;background:transparent;padding:10px 8px 26px;cursor:pointer;display:flex;align-items:flex-end;justify-content:center;transition:background .15s,border-color .15s}
+.grid.full .obj{padding:6px 4px 18px}
 .obj img{max-height:100%;max-width:100%;object-fit:contain;filter:grayscale(1) contrast(1.05);mix-blend-mode:multiply;transition:transform .2s}
 .obj:hover{border-color:rgba(0,0,51,.25)}
 .obj:hover img{transform:translateY(-3px)}
 .obj:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .obj .no{position:absolute;left:6px;bottom:4px;font-family:var(--f-num);font-size:19px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.grid.full .obj .no{left:4px;bottom:2px;font-size:15px}
 .obj .pick{position:absolute;right:6px;top:6px;width:26px;height:26px;border-radius:50%;background:var(--mark);color:var(--ground);font-family:var(--f-num);font-size:20px;line-height:26px;text-align:center}
+.grid.full .obj .pick{right:3px;top:3px;width:20px;height:20px;font-size:16px;line-height:20px}
 .obj[aria-pressed="true"]{border-color:var(--mark);background:rgba(255,255,255,.45)}
 .obj[aria-pressed="true"] .no{color:var(--mark)}
 .obj[disabled]{cursor:default}
 .obj[disabled] img{opacity:.45}
 
+/* the tray: below the case of twelve; above the full view, which is long */
+.wrap>header{order:-2}
+body[data-mode="full"] .tray{order:-1}
 /* the tray */
 .tray{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px}
-.slots{display:flex;gap:8px;padding-bottom:18px}
+.slots{display:flex;flex-wrap:wrap;gap:14px;padding-bottom:18px}
+.group{display:flex;gap:6px}
 .slot{width:64px;height:80px;border:1px dashed var(--rule);display:flex;align-items:center;justify-content:center;font-family:var(--f-num);font-size:22px;color:var(--soft);position:relative;background:var(--ground)}
+.slots.small .slot{width:40px;height:52px;font-size:17px}
 .slot img{max-width:84%;max-height:84%;object-fit:contain;filter:grayscale(1)}
 .slot.full{border:1px solid var(--mark)}
 .slot.full::after{content:attr(data-no);position:absolute;bottom:-18px;left:0;font-size:16px;color:var(--mark)}
+.slots.small .slot.full::after{font-size:14px;bottom:-16px}
 .tray .count{color:var(--soft);min-width:9ch}
 .actions{display:flex;flex-wrap:wrap;gap:8px}
 .btn{font-family:var(--f-text);font-size:15px;font-weight:500;padding:10px 16px;border:1px solid var(--ink);background:var(--ground);color:var(--ink);cursor:pointer}
@@ -62,8 +75,9 @@ h1{font-family:var(--f-num);font-weight:400;font-size:clamp(48px,9vw,84px);line-
 .btn:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
 .btn.quiet{border-color:var(--rule)}
 
-/* the answer: an A4 sheet */
+/* the answer: one A4 sheet per task */
 .answer{display:grid;justify-items:center;gap:14px;background:var(--rule);padding:28px 16px}
+.sheets{display:grid;justify-items:center;gap:22px;width:100%}
 .sheet{background:var(--sheet);width:min(100%,520px);aspect-ratio:210/297;max-width:100%;padding:6% 7%;display:grid;grid-template-rows:auto auto 1fr auto;gap:clamp(10px,2.6vw,18px);box-shadow:0 1px 0 rgba(0,0,51,.15),0 10px 30px rgba(0,0,51,.12)}
 .sheet-top{display:flex;flex-wrap:wrap;white-space:nowrap;justify-content:space-between;gap:8px;font-family:var(--f-num);font-size:clamp(15px,3.6vw,20px);line-height:1;border-bottom:1px solid var(--ink);padding-bottom:8px}
 .task{font-family:var(--f-text);font-weight:600;font-size:clamp(19px,4.6vw,30px);line-height:1.18;letter-spacing:-.01em;text-wrap:balance;margin:0}
@@ -86,9 +100,10 @@ footer{font-size:12.5px;color:var(--soft);max-width:70ch;border-top:1px solid va
   @page{size:A4;margin:0}
   html,body{background:#fff}
   .wrap{display:block;padding:0;max-width:none}
-  .wrap>*:not(.answer),.answer>*:not(.sheet){display:none!important}
-  .answer{display:block;padding:0;background:none}
-  .sheet{width:210mm;height:296mm;break-inside:avoid;aspect-ratio:auto;max-width:none;padding:16mm 16mm 14mm;box-shadow:none;animation:none;gap:7mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .wrap>*:not(.answer),.answer>*:not(.sheets){display:none!important}
+  .answer,.sheets{display:block;padding:0;background:none}
+  .sheet{width:210mm;height:296mm;break-inside:avoid;break-after:page;aspect-ratio:auto;max-width:none;padding:16mm 16mm 14mm;box-shadow:none;animation:none;gap:7mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sheet:last-child{break-after:auto}
   .sheet-top{font-size:15pt}
   .task{font-size:26pt}
   .done{font-size:16pt}
@@ -108,9 +123,15 @@ footer{font-size:12.5px;color:var(--soft);max-width:70ch;border-top:1px solid va
       <h1>Supermenu</h1>
       <p class="lede" id="lede"></p>
     </div>
-    <div class="lang" role="group" aria-label="Language">
-      <button type="button" id="lang-en" data-lang="en">EN</button>
-      <button type="button" id="lang-es" data-lang="es">ES</button>
+    <div class="toggles">
+      <div class="seg" role="group" aria-label="View">
+        <button type="button" id="mode-case" data-mode="case"></button>
+        <button type="button" id="mode-full" data-mode="full"></button>
+      </div>
+      <div class="seg" role="group" aria-label="Language">
+        <button type="button" id="lang-en" data-lang="en">EN</button>
+        <button type="button" id="lang-es" data-lang="es">ES</button>
+      </div>
     </div>
   </header>
 
@@ -129,16 +150,7 @@ footer{font-size:12.5px;color:var(--soft);max-width:70ch;border-top:1px solid va
   </section>
 
   <section class="answer" id="answer" hidden>
-    <article class="sheet" id="sheet">
-      <div class="sheet-top"><span id="sheet-label">Supermenu</span><span id="sheet-code"></span><span id="sheet-date"></span></div>
-      <p class="task" id="task"></p>
-      <div class="space" aria-hidden="true"></div>
-      <div class="sheet-foot">
-        <div class="ticks"><div class="done"><span class="tick" aria-hidden="true"></span><span id="done-label"></span></div><div class="done"><span class="tick" aria-hidden="true"></span><span id="nfm-label"></span></div></div>
-        <p class="return" id="return"></p>
-        <div class="chosen" id="chosen"></div>
-      </div>
-    </article>
+    <div class="sheets" id="sheets"></div>
     <p class="sheet-note" id="sheet-note"></p>
     <div class="after">
       <button type="button" class="btn primary" id="print" hidden></button>
@@ -157,21 +169,32 @@ footer{font-size:12.5px;color:var(--soft);max-width:70ch;border-top:1px solid va
 (()=>{
 const D=JSON.parse(document.getElementById('data').textContent);
 const PRINT=false; // the site build turns this on; the hosted preview cannot print
-const SHOW=12, PICKS=3, TAG='#supermenuARS';
-// a short code for each sheet, so it can be marked done later (no confusable letters)
+const SHOW=12, TAG='#supermenuARS';
+// how many picks each view takes: the case wants three; the full view six, nine or twelve
+const PICKS={case:[3],full:[6,9,12]};
 /*__CODEC__*/
 
 const WORDS={
- en:{lede:'Pick three objects from the case. The machine answers with one thing to do.',
-     case:'The case',set:n=>`Set ${n}`,count:n=>`${n} of 3 chosen`,go:'Show my task',reshuffle:'Another set of objects',
-     copy:'Copy the task',copied:'Copied.',copyFail:'Select the task text to copy it.',next:'Another task',again:'Start again',
-     note:'Do it in the box, in your own time. Nothing you pick is kept.',print:'Print the sheet',done:'Done',nfm:'Not for me',ret:(c,tag)=>`Tick a box. If you like, post a photo of the sheet with <b>${tag}</b>. Share only what you are happy to show.`,of:(i,n)=>`${i} of ${n}`,
+ en:{lede:{case:'Pick three objects from the case. The machine answers with one thing to do.',full:'Pick six, nine or twelve objects. The machine answers with one task for every three.'},
+     modeCase:'The case',modeFull:'Full view',
+     case:'The case',caseFull:'All the objects',set:n=>`Set ${n}`,many:n=>`${n} objects`,
+     count:{case:n=>`${n} of 3 chosen`,full:n=>`${n} chosen. Pick 6, 9 or 12.`},
+     go:{case:'Show my task',full:'Compose my tasks'},reshuffle:{case:'Another set of objects',full:'Shuffle the case'},
+     copy:{one:'Copy the task',many:'Copy the tasks'},copied:'Copied.',copyFail:'Select the task text to copy it.',
+     next:{one:'Another task',many:'Other tasks'},again:'Start again',
+     note:'Do it in the box, in your own time. Nothing you pick is kept.',print:{one:'Print the sheet',many:'Print the sheets'},
+     done:'Done',nfm:'Not for me',ret:(c,tag)=>`Tick a box. If you like, post a photo of the sheet with <b>${tag}</b>. Share only what you are happy to show.`,
      credits:'Objects photographed in UK museum collections, gathered for the COSMORAMA Supermenu (2017). Images from the British Museum: © The Trustees of the British Museum, shared under CC BY-NC-SA 4.0. Full object credits to follow.',
      pickLabel:(no,on)=>`Object ${no}${on?', chosen':''}`},
- es:{lede:'Elige tres objetos de la vitrina. La máquina te responde con una cosa por hacer.',
-     case:'La vitrina',set:n=>`Serie ${n}`,count:n=>`${n} de 3 elegidos`,go:'Ver mi tarea',reshuffle:'Otros objetos',
-     copy:'Copiar la tarea',copied:'Copiada.',copyFail:'Selecciona el texto de la tarea para copiarlo.',next:'Otra tarea',again:'Empezar de nuevo',
-     note:'Hazla en el recuadro, a tu ritmo. No se guarda nada de lo que eliges.',print:'Imprimir la hoja',done:'Hecha',nfm:'No es para mí',ret:(c,tag)=>`Marca una casilla. Si quieres, publica una foto de la hoja con <b>${tag}</b>. Comparte solo lo que quieras mostrar.`,of:(i,n)=>`${i} de ${n}`,
+ es:{lede:{case:'Elige tres objetos de la vitrina. La máquina te responde con una cosa por hacer.',full:'Elige seis, nueve o doce objetos. La máquina te responde con una tarea por cada tres.'},
+     modeCase:'La vitrina',modeFull:'Vista completa',
+     case:'La vitrina',caseFull:'Todos los objetos',set:n=>`Serie ${n}`,many:n=>`${n} objetos`,
+     count:{case:n=>`${n} de 3 elegidos`,full:n=>`${n} elegidos. Elige 6, 9 o 12.`},
+     go:{case:'Ver mi tarea',full:'Componer mis tareas'},reshuffle:{case:'Otros objetos',full:'Revolver la vitrina'},
+     copy:{one:'Copiar la tarea',many:'Copiar las tareas'},copied:'Copiado.',copyFail:'Selecciona el texto de las tareas para copiarlo.',
+     next:{one:'Otra tarea',many:'Otras tareas'},again:'Empezar de nuevo',
+     note:'Hazla en el recuadro, a tu ritmo. No se guarda nada de lo que eliges.',print:{one:'Imprimir la hoja',many:'Imprimir las hojas'},
+     done:'Hecha',nfm:'No es para mí',ret:(c,tag)=>`Marca una casilla. Si quieres, publica una foto de la hoja con <b>${tag}</b>. Comparte solo lo que quieras mostrar.`,
      credits:'Objetos fotografiados en colecciones de museos del Reino Unido, reunidos para el Supermenu de COSMORAMA (2017). Imágenes del British Museum: © The Trustees of the British Museum, bajo licencia CC BY-NC-SA 4.0. Créditos completos por venir.',
      pickLabel:(no,on)=>`Objeto ${no}${on?', elegido':''}`}
 };
@@ -179,33 +202,48 @@ let lang=(()=>{try{const v=localStorage.getItem('supermenu.lang');if(v==='en'||v
 const W=()=>WORDS[lang];
 const $=id=>document.getElementById(id);
 const pad=n=>String(n).padStart(3,'0');
-const OBJ=Object.fromEntries(D.objects.map(o=>[o.id,o]));
+// objects in the case now, plus any older ones that old codes still name (never shown in the case)
+const OBJ=Object.fromEntries([...(D.archive||[]),...D.objects].map(o=>[o.id,o]));
+const ALL=D.objects.map(o=>o.id);
 
 // seeded shuffle, so a set can be named and redrawn
 function rng(seed){let s=seed>>>0||1;return()=>{s^=s<<13;s>>>=0;s^=s>>17;s^=s<<5;s>>>=0;return s/4294967296}}
 function shuffle(a,r){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const newSeed=()=>(crypto.getRandomValues(new Uint32Array(1))[0])||Date.now();
 
 /* The engine. Each object carries one operation; each task carries a chain of them.
    A task scores, for each object picked, its closest operation: the same one counts in full,
    a neighbour on the operations map counts in part, more if it shares a family.
    Nothing about the picker is used, only the objects. */
 function sim(a,b){
-  if(a===b)return 1;const A=D.ops[a],B=D.ops[b];if(!A||!B)return 0;
+  if(!a||!b)return 0;if(a===b)return 1;const A=D.ops[a],B=D.ops[b];if(!A||!B)return 0;
   const d=Math.hypot(A.xy[0]-B.xy[0],A.xy[1]-B.xy[1]);
   return Math.exp(-d/1.5)*.6+(A.cat===B.cat?.15:0);
 }
 function rank(ids){
-  const picked=ids.map(id=>OBJ[id].op);
+  const picked=ids.map(id=>OBJ[id]&&OBJ[id].op);
   const salt=ids.slice().sort((a,b)=>a-b).reduce((h,x)=>(h*31+x)>>>0,7);
   return D.tasks.map(t=>({t,s:picked.reduce((sum,p)=>sum+Math.max(...t.chain.map(c=>sim(p,c))),0),tie:((t.n*2654435761)^salt)>>>0}))
     .sort((a,b)=>b.s-a.s||a.tie-b.tie).map(x=>x.t);
 }
+/* A composed set: the picks are read in threes, in the order picked. Each three gets its closest task
+   that no earlier three has taken. "Other tasks" moves every sheet one step further down its list. */
+function compose(picks,shift){
+  const used=new Set(),out=[];
+  for(let i=0;i+3<=picks.length;i+=3){
+    const ids=picks.slice(i,i+3),free=rank(ids).filter(t=>!used.has(t.n));
+    const t=free[shift%free.length];used.add(t.n);out.push({ids,task:t,code:encodeSheet(ids,t.n)});
+  }
+  return out;
+}
 // For later (stored picks): one place where a finished choice could be recorded. Nothing is kept now.
-function recordPicks(ids,taskN){/* intentionally empty in this version */}
+function recordPicks(sheets){/* intentionally empty in this version */}
 
-const S={setNo:1,seed:0,shown:[],picks:[],ranked:[],at:0,code:''};
+const S={mode:'case',setNo:1,shown:[],fullOrder:shuffle(ALL,rng(newSeed())),picks:[],sheets:[],shift:0};
+const limits=()=>PICKS[S.mode], maxPicks=()=>Math.max(...limits()), ready=()=>limits().includes(S.picks.length);
+
 /* Embedded on another page (Squarespace): tell that page how tall this one is, so it shows no scroll bar
-   of its own, and ask it to scroll when the sheet appears. See embed.html for the other half. */
+   of its own, and ask it to scroll when the sheets appear. See embed.html for the other half. */
 const EMBED=PRINT&&(()=>{try{return window.self!==window.top}catch(e){return true}})(); // only the site build talks to its host page
 function tellParent(msg){if(EMBED)try{parent.postMessage(Object.assign({supermenu:true},msg),'*')}catch(e){}}
 if(EMBED){const send=()=>tellParent({h:Math.ceil(document.body.getBoundingClientRect().height)});
@@ -215,90 +253,128 @@ function goTo(el){
   if(EMBED)tellParent({y:el?Math.round(el.getBoundingClientRect().top+window.scrollY):0});
   else if(el)el.scrollIntoView({behavior:smooth,block:'start'});else window.scrollTo({top:0});
 }
-// A sheet can be reopened from its code (#SM-XXXX), which is how printing works from inside an embed
-function openFromCode(code){
-  const r=decodeSheet(code);if(!r||!r.objects.every(id=>OBJ[id]))return false;
-  S.picks=r.objects.slice();const rest=S.shown.filter(id=>!S.picks.includes(id));S.shown=[...S.picks,...rest].slice(0,SHOW);
-  S.ranked=rank(S.picks);S.at=Math.max(0,S.ranked.findIndex(t=>t.n===r.task));S.code=encodeSheet(S.picks,S.ranked[S.at].n);
+/* Sheets can be reopened from their codes (#SM2-XXXXX, several joined by dots), which is how printing
+   works from inside an embed. A single code opens in the case, several in the full view. */
+function openFromCodes(codes){
+  const sheets=[];
+  for(const c of codes){const r=decodeSheet(c);if(!r||!r.objects.every(id=>OBJ[id]))return false;
+    const t=D.tasks.find(x=>x.n===r.task);if(!t)return false;sheets.push({ids:r.objects,task:t,code:c.toUpperCase()})}
+  if(!sheets.length)return false;
+  S.mode=sheets.length>1?'full':'case';S.picks=sheets.flatMap(s=>s.ids);S.sheets=sheets;S.shift=0;
+  if(S.mode==='case'){const rest=S.shown.filter(id=>!S.picks.includes(id));S.shown=[...S.picks,...rest].slice(0,SHOW)}
   $('answer').hidden=false;return true;
 }
 function newSet(){
-  S.seed=(crypto.getRandomValues(new Uint32Array(1))[0])||Date.now();
-  S.shown=shuffle(D.objects.map(o=>o.id),rng(S.seed)).slice(0,SHOW);
+  S.shown=shuffle(ALL,rng(newSeed())).slice(0,SHOW);
   S.picks=S.picks.filter(id=>S.shown.includes(id));
 }
 
 function renderGrid(){
-  const g=$('grid');g.textContent='';
-  for(const id of S.shown){
-    const o=OBJ[id],i=S.picks.indexOf(id),on=i>=0,full=S.picks.length>=PICKS&&!on;
+  const g=$('grid');g.textContent='';g.className='grid'+(S.mode==='full'?' full':'');
+  const ids=S.mode==='full'?S.fullOrder:S.shown;
+  for(const id of ids){
+    const o=OBJ[id],i=S.picks.indexOf(id),on=i>=0,full=S.picks.length>=maxPicks()&&!on;
     const b=document.createElement('button');b.type='button';b.className='obj';b.id='obj-'+id;
     b.setAttribute('aria-pressed',on);b.setAttribute('aria-label',W().pickLabel(pad(id),on));if(full)b.disabled=true;
-    const img=document.createElement('img');img.src=o.img;img.alt='';img.decoding='async';b.append(img);
+    const img=document.createElement('img');img.src=o.img;img.alt='';img.decoding='async';if(S.mode==='full')img.loading='lazy';b.append(img);
     const no=document.createElement('span');no.className='no';no.textContent=pad(id);b.append(no);
     if(on){const p=document.createElement('span');p.className='pick';p.textContent=i+1;b.append(p)}
     b.addEventListener('click',()=>toggle(id));g.append(b);
   }
 }
 function renderTray(){
-  const s=$('slots');s.textContent='';
-  for(let i=0;i<PICKS;i++){
-    const id=S.picks[i],d=document.createElement('div');d.className='slot'+(id?' full':'');
-    if(id){const img=document.createElement('img');img.src=OBJ[id].img;img.alt='';d.append(img);d.dataset.no=pad(id)}else d.textContent=i+1;
-    s.append(d);
+  const s=$('slots');s.textContent='';s.className='slots'+(S.mode==='full'?' small':'');
+  const n=maxPicks();
+  for(let g=0;g<n;g+=3){
+    const grp=document.createElement('div');grp.className='group';
+    for(let i=g;i<g+3;i++){
+      const id=S.picks[i],d=document.createElement('div');d.className='slot'+(id?' full':'');
+      if(id){const img=document.createElement('img');img.src=OBJ[id].img;img.alt='';d.append(img);d.dataset.no=pad(id)}else d.textContent=i+1;
+      grp.append(d);
+    }
+    s.append(grp);
   }
-  $('count').textContent=W().count(S.picks.length);
-  $('go').disabled=S.picks.length<PICKS;
+  $('count').textContent=W().count[S.mode](S.picks.length);
+  $('go').disabled=!ready();
 }
 function renderWords(){
-  document.documentElement.lang=lang==='es'?'es-MX':'en-GB';
-  $('lede').textContent=W().lede;$('case-label').textContent=W().case;$('case-set').textContent=W().set(S.setNo);
-  $('go').textContent=W().go;$('reshuffle').textContent=W().reshuffle;$('copy').textContent=W().copy;$('print').textContent=W().print;$('print').hidden=!PRINT;
-  $('next').textContent=W().next;$('again').textContent=W().again;$('sheet-note').textContent=W().note;$('credits').textContent=W().credits;
-  for(const b of document.querySelectorAll('.lang button'))b.setAttribute('aria-pressed',b.dataset.lang===lang);
+  document.documentElement.lang=lang==='es'?'es-MX':'en-GB';document.body.dataset.mode=S.mode;
+  const many=S.sheets.length>1?'many':'one';
+  $('lede').textContent=W().lede[S.mode];
+  $('mode-case').textContent=W().modeCase;$('mode-full').textContent=W().modeFull;
+  $('case-label').textContent=S.mode==='full'?W().caseFull:W().case;
+  $('case-set').textContent=S.mode==='full'?W().many(ALL.length):W().set(S.setNo);
+  $('go').textContent=W().go[S.mode];$('reshuffle').textContent=W().reshuffle[S.mode];
+  $('copy').textContent=W().copy[many];$('print').textContent=W().print[many];$('print').hidden=!PRINT;
+  $('next').textContent=W().next[many];$('again').textContent=W().again;$('sheet-note').textContent=W().note;$('credits').textContent=W().credits;
+  for(const b of document.querySelectorAll('[data-lang]'))b.setAttribute('aria-pressed',b.dataset.lang===lang);
+  for(const b of document.querySelectorAll('[data-mode]'))b.setAttribute('aria-pressed',b.dataset.mode===S.mode);
 }
-function renderSheet(animate){
-  const t=S.ranked[S.at];if(!t)return;
-  $('task').textContent=t[lang];
-  $('sheet-code').textContent=S.code;$('done-label').textContent=W().done;$('nfm-label').textContent=W().nfm;
-  $('return').innerHTML=W().ret(S.code,TAG);
-  $('sheet-date').textContent=new Date().toLocaleDateString(lang==='es'?'es-MX':'en-GB',{day:'2-digit',month:'2-digit',year:'numeric'});
-  const c=$('chosen');c.textContent='';
-  for(const id of S.picks){const f=document.createElement('figure'),img=document.createElement('img'),cap=document.createElement('figcaption');
-    img.src=OBJ[id].img;img.alt='';cap.textContent=pad(id);f.append(img,cap);c.append(f)}
-  const sh=$('sheet');if(animate){sh.classList.remove('enter');void sh.offsetWidth;sh.classList.add('enter')}
+function el(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
+function renderSheets(animate){
+  const box=$('sheets');box.textContent='';
+  const date=new Date().toLocaleDateString(lang==='es'?'es-MX':'en-GB',{day:'2-digit',month:'2-digit',year:'numeric'});
+  S.sheets.forEach((sh,k)=>{
+    const a=el('article','sheet'+(animate?' enter':''));if(animate)a.style.animationDelay=(k*80)+'ms';
+    const top=el('div','sheet-top');
+    top.append(el('span',null,S.sheets.length>1?`Supermenu ${k+1}/${S.sheets.length}`:'Supermenu'),el('span',null,sh.code),el('span',null,date));
+    const foot=el('div','sheet-foot'),ticks=el('div','ticks');
+    for(const w of [W().done,W().nfm]){const d=el('div','done');const t=el('span','tick');t.setAttribute('aria-hidden','true');d.append(t,el('span',null,w));ticks.append(d)}
+    const ret=el('p','return');ret.innerHTML=W().ret(sh.code,TAG);
+    const chosen=el('div','chosen');
+    for(const id of sh.ids){const f=el('figure'),img=el('img');img.src=OBJ[id].img;img.alt='';f.append(img,el('figcaption',null,pad(id)));chosen.append(f)}
+    foot.append(ticks,ret,chosen);
+    const space=el('div','space');space.setAttribute('aria-hidden','true');
+    a.append(top,el('p','task',sh.task[lang]),space,foot);box.append(a);
+  });
   $('toast').textContent='';
 }
-function renderAll(){renderWords();renderGrid();renderTray();if(!$('answer').hidden)renderSheet(false)}
+function renderAll(){renderWords();renderGrid();renderTray();if(!$('answer').hidden)renderSheets(false)}
 
 function toggle(id){
   const i=S.picks.indexOf(id);
-  if(i>=0)S.picks.splice(i,1);else if(S.picks.length<PICKS)S.picks.push(id);
-  if(!$('answer').hidden&&S.picks.length<PICKS)$('answer').hidden=true;
-  renderGrid();renderTray();
+  if(i>=0)S.picks.splice(i,1);else if(S.picks.length<maxPicks())S.picks.push(id);
+  if(!$('answer').hidden){$('answer').hidden=true;S.sheets=[]}
+  renderGrid();renderTray();renderWords();
+}
+function setMode(m){
+  if(m===S.mode)return;S.mode=m;S.picks=[];S.sheets=[];$('answer').hidden=true;
+  if(m==='case')newSet();renderAll();
 }
 $('go').addEventListener('click',()=>{
-  if(S.picks.length<PICKS)return;
-  S.ranked=rank(S.picks);S.at=0;S.code=encodeSheet(S.picks,S.ranked[0].n);recordPicks(S.picks,S.ranked[0].n);
-  $('answer').hidden=false;renderSheet(true);
+  if(!ready())return;
+  S.shift=0;S.sheets=compose(S.picks,0);recordPicks(S.sheets);
+  $('answer').hidden=false;renderWords();renderSheets(true);
   goTo($('answer'));
 });
 $('print').addEventListener('click',()=>{
-  if(EMBED){const u=location.origin+location.pathname+'?print#'+S.code;const w=window.open(u,'_blank');if(!w)location.href=u}
+  const codes=S.sheets.map(s=>s.code).join('.');
+  if(EMBED){const u=location.origin+location.pathname+'?print#'+codes;const w=window.open(u,'_blank');if(!w)location.href=u}
   else window.print();
 });
-$('next').addEventListener('click',()=>{S.at=(S.at+1)%S.ranked.length;S.code=encodeSheet(S.picks,S.ranked[S.at].n);renderSheet(true)});
-$('again').addEventListener('click',()=>{S.picks=[];S.setNo++;newSet();$('answer').hidden=true;renderAll();goTo(null)});
-$('reshuffle').addEventListener('click',()=>{S.setNo++;newSet();$('answer').hidden=true;renderAll()});
-$('copy').addEventListener('click',()=>{
-  const text=$('task').textContent;
-  try{navigator.clipboard.writeText(text).then(()=>{$('toast').textContent=W().copied},()=>fallback())}catch(e){fallback()}
-  function fallback(){const r=document.createRange();r.selectNodeContents($('task'));const s=getSelection();s.removeAllRanges();s.addRange(r);$('toast').textContent=W().copyFail}
+$('next').addEventListener('click',()=>{S.shift++;S.sheets=compose(S.picks,S.shift);renderSheets(true)});
+$('again').addEventListener('click',()=>{
+  S.picks=[];S.sheets=[];$('answer').hidden=true;
+  if(S.mode==='case'){S.setNo++;newSet()}else S.fullOrder=shuffle(ALL,rng(newSeed()));
+  renderAll();goTo(null);
 });
-for(const b of document.querySelectorAll('.lang button'))b.addEventListener('click',()=>{lang=b.dataset.lang;try{localStorage.setItem('supermenu.lang',lang)}catch(e){}renderAll()});
+$('reshuffle').addEventListener('click',()=>{
+  if(S.mode==='case'){S.setNo++;newSet();$('answer').hidden=true;S.sheets=[]}
+  else S.fullOrder=shuffle(ALL,rng(newSeed()));
+  renderAll();
+});
+$('copy').addEventListener('click',()=>{
+  const text=S.sheets.map((s,k)=>(S.sheets.length>1?`${k+1}. `:'')+s.task[lang]).join('\n');
+  try{navigator.clipboard.writeText(text).then(()=>{$('toast').textContent=W().copied},()=>fallback())}catch(e){fallback()}
+  function fallback(){const r=document.createRange();r.selectNodeContents($('sheets'));const s=getSelection();s.removeAllRanges();s.addRange(r);$('toast').textContent=W().copyFail}
+});
+for(const b of document.querySelectorAll('[data-lang]'))b.addEventListener('click',()=>{lang=b.dataset.lang;try{localStorage.setItem('supermenu.lang',lang)}catch(e){}renderAll()});
+for(const b of document.querySelectorAll('[data-mode]'))b.addEventListener('click',()=>setMode(b.dataset.mode));
 
 newSet();
-const fromCode=/^#SM-[A-Z0-9]{4}$/i.test(location.hash)&&openFromCode(location.hash.slice(1));
+const h=location.hash.slice(1);
+if(/^full$/i.test(h))S.mode='full';
+const fromCode=/^SM\d*-[A-Z0-9]{4,6}(\.SM\d*-[A-Z0-9]{4,6})*$/i.test(h)&&openFromCodes(h.split('.'));
 renderAll();
 if(fromCode){if(/[?&]print\b/.test(location.search)&&PRINT&&!EMBED)setTimeout(()=>window.print(),600);else goTo($('answer'))}
 })();
