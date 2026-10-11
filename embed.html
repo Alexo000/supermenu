@@ -8,9 +8,16 @@
   var SITE='https://supermenu-ars.netlify.app';
   var frame=document.getElementById('supermenu-frame');
   frame.src=SITE+'/';
+  var OFFSET=0; // if the site has a fixed header, its height in pixels, so the tray stops below it
+  function view(){ // tell the page how far its top has gone above the screen, so the full view's tray can follow
+    try{frame.contentWindow.postMessage({supermenuView:Math.round(OFFSET-frame.getBoundingClientRect().top)},SITE)}catch(err){}
+  }
+  window.addEventListener('scroll',view,{passive:true});
+  window.addEventListener('resize',view);
+  frame.addEventListener('load',view);
   window.addEventListener('message',function(e){
     if(e.origin!==SITE||!e.data||!e.data.supermenu)return;
-    if(typeof e.data.h==='number')frame.style.height=e.data.h+'px';
+    if(typeof e.data.h==='number'){frame.style.height=e.data.h+'px';view();}
     if(typeof e.data.y==='number'){
       var top=frame.getBoundingClientRect().top+window.pageYOffset+e.data.y-12;
       window.scrollTo({top:Math.max(0,top),behavior:'smooth'});

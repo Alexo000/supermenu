@@ -57,6 +57,17 @@ h1{font-family:var(--f-num);font-weight:400;font-size:clamp(48px,9vw,84px);line-
 /* the tray: below the case of twelve; above the full view, which is long */
 .wrap>header{order:-2}
 body[data-mode="full"] .tray{order:-1}
+/* full view: the tray comes down with you as you scroll (on the host page, embed.html tells it where to sit) */
+body[data-mode="full"] .tray{position:sticky;top:0;z-index:3;background:var(--ground);padding:10px 0 2px;margin:-10px 0 -2px;box-shadow:0 1px 0 var(--rule)}
+body.embed[data-mode="full"] .tray{position:relative}
+@media (max-width:640px){
+  body[data-mode="full"] .tray{gap:6px 10px}
+  body[data-mode="full"] .slots{gap:6px;padding-bottom:14px}
+  body[data-mode="full"] .group{gap:2px}
+  body[data-mode="full"] .slots.small .slot{width:26px;height:34px;font-size:13px}
+  body[data-mode="full"] .slots.small .slot.full::after{font-size:12px;bottom:-14px}
+  body[data-mode="full"] .btn{padding:8px 12px}
+}
 /* the tray */
 .tray{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px}
 .slots{display:flex;flex-wrap:wrap;gap:14px;padding-bottom:18px}
@@ -246,7 +257,18 @@ const limits=()=>PICKS[S.mode], maxPicks=()=>Math.max(...limits()), ready=()=>li
    of its own, and ask it to scroll when the sheets appear. See embed.html for the other half. */
 const EMBED=PRINT&&(()=>{try{return window.self!==window.top}catch(e){return true}})(); // only the site build talks to its host page
 function tellParent(msg){if(EMBED)try{parent.postMessage(Object.assign({supermenu:true},msg),'*')}catch(e){}}
-if(EMBED){const send=()=>tellParent({h:Math.ceil(document.body.getBoundingClientRect().height)});
+/* Inside the host page the frame never scrolls itself, so sticky cannot work there: the host says how far
+   the frame's top has gone above the screen (supermenuView) and the tray is moved down by hand. */
+let hostView=0;
+function placeTray(){
+  if(!EMBED)return;const tray=document.querySelector('.tray');tray.style.transform='';
+  if(document.body.dataset.mode!=='full')return;
+  const grid=$('grid'),top=tray.offsetTop,end=grid.offsetTop+grid.offsetHeight-tray.offsetHeight;
+  const s=Math.max(0,Math.min(hostView-top,end-top));if(s>0)tray.style.transform='translateY('+s+'px)';
+}
+if(EMBED){document.body.classList.add('embed');
+  window.addEventListener('message',e=>{if(e.source!==parent||!e.data||typeof e.data.supermenuView!=='number')return;hostView=e.data.supermenuView;placeTray()});}
+if(EMBED){const send=()=>{tellParent({h:Math.ceil(document.body.getBoundingClientRect().height)});placeTray()};
   try{new ResizeObserver(send).observe(document.body)}catch(e){setInterval(send,800)}window.addEventListener('load',send)}
 function goTo(el){
   const smooth=matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
@@ -308,7 +330,7 @@ function renderWords(){
   $('copy').textContent=W().copy[many];$('print').textContent=W().print[many];$('print').hidden=!PRINT;
   $('next').textContent=W().next[many];$('again').textContent=W().again;$('sheet-note').textContent=W().note;$('credits').textContent=W().credits;
   for(const b of document.querySelectorAll('[data-lang]'))b.setAttribute('aria-pressed',b.dataset.lang===lang);
-  for(const b of document.querySelectorAll('[data-mode]'))b.setAttribute('aria-pressed',b.dataset.mode===S.mode);
+  for(const b of document.querySelectorAll('button[data-mode]'))b.setAttribute('aria-pressed',b.dataset.mode===S.mode);
 }
 function el(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
 function renderSheets(animate){
@@ -329,7 +351,7 @@ function renderSheets(animate){
   });
   $('toast').textContent='';
 }
-function renderAll(){renderWords();renderGrid();renderTray();if(!$('answer').hidden)renderSheets(false)}
+function renderAll(){renderWords();renderGrid();renderTray();if(!$('answer').hidden)renderSheets(false);placeTray()}
 
 function toggle(id){
   const i=S.picks.indexOf(id);
@@ -369,7 +391,7 @@ $('copy').addEventListener('click',()=>{
   function fallback(){const r=document.createRange();r.selectNodeContents($('sheets'));const s=getSelection();s.removeAllRanges();s.addRange(r);$('toast').textContent=W().copyFail}
 });
 for(const b of document.querySelectorAll('[data-lang]'))b.addEventListener('click',()=>{lang=b.dataset.lang;try{localStorage.setItem('supermenu.lang',lang)}catch(e){}renderAll()});
-for(const b of document.querySelectorAll('[data-mode]'))b.addEventListener('click',()=>setMode(b.dataset.mode));
+for(const b of document.querySelectorAll('button[data-mode]'))b.addEventListener('click',()=>setMode(b.dataset.mode));
 
 newSet();
 const h=location.hash.slice(1);
