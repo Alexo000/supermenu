@@ -322,7 +322,9 @@ function compose(picks,shift){
 /* Published answers. Writing stays on the page; "Publish anonymously" sends only the task number, the text and
    the page language to a Google Form. Approved answers come back from a published tab of its sheet (CSV).
    Leave form or csv empty to switch that half off. */
-const ANSWERS={form:'',fields:{task:'',answer:'',lang:''},csv:''};
+const ANSWERS={form:'https://docs.google.com/forms/d/e/1FAIpQLScA_XhAVbAjOFMeLDXx7VLH0A_S3o5H8YdMSdFUh__B9dJhfA/formResponse',
+  fields:{task:'entry.444877635',answer:'entry.994802759',lang:'entry.1807381848'},
+  csv:'https://docs.google.com/spreadsheets/d/e/2PACX-1vQGVIaaMYku7bI99xa-To4DYUNuQkc61D5CYEn_TG-CFj8vsROW3BuhYWzB5piKMBfjxLMSGKHMvnOm/pub?gid=1001&single=true&output=csv'};
 const TEXTS={};            // what has been typed, by sheet code, so a re-render keeps it
 const SENT=new Set();      // sheet codes already published from this page
 let SHARED=null;           // task number -> [{text,date}], loaded once
