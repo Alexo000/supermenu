@@ -10,7 +10,7 @@ Run it on your Mac (it needs your own internet connection), from the supermenu f
 Or open Claude Code in the supermenu folder and ask it to run research/search.py.
 
 What it does: for each row of the wanted list and each search word, it asks three open archives
-(the Met, the Cleveland Museum of Art, the Art Institute of Chicago) for objects whose images are
+(the Met, the Cleveland Museum of Art, the Art Institute of Chicago, the Wellcome Collection, and any added later) for objects whose images are
 public domain or CC0, downloads a small picture of each, and writes everything it found to
 research/candidates.csv. Nothing is sent but the search words. Only Python's standard library is used.
 
@@ -45,7 +45,10 @@ SKIP = re.compile(r'\b(skull|cranium|mumm(y|ies)|human remains|tsantsa|shrunken 
 def get(url, tries=3):
     for i in range(tries):
         try:
-            req = urllib.request.Request(url, headers={'User-Agent': UA, 'AIC-User-Agent': UA})
+            h = {'User-Agent': UA, 'AIC-User-Agent': UA}
+            if 'artic.edu/iiif' in url:
+                h['Referer'] = 'https://www.artic.edu/'  # Chicago's image server asks for it
+            req = urllib.request.Request(url, headers=h)
             with urllib.request.urlopen(req, timeout=30) as r:
                 return r.read()
         except Exception as e:  # network trouble: wait and try again
@@ -59,8 +62,9 @@ def getjson(url):
 
 
 def met(term, per):
-    q = urllib.parse.urlencode({'q': term, 'hasImages': 'true'})
-    ids = (getjson(f'https://collectionapi.metmuseum.org/public/collection/v1/search?{q}').get('objectIDs') or [])
+    # the v1 search was retired on 1 October 2026; v1.1 takes the same filters and pages its results
+    q = urllib.parse.urlencode({'q': term, 'hasImages': 'true', 'limit': per * 6})
+    ids = (getjson(f'https://collectionapi.metmuseum.org/public/collection/v1.1/search?{q}').get('objectIDs') or [])
     out = []
     for oid in ids[:per * 4]:  # some records are not open access; look a little further
         if len(out) >= per:
@@ -113,7 +117,30 @@ def chicago(term, per):
     return out
 
 
-SOURCES = {'met': met, 'cleveland': cleveland, 'chicago': chicago}
+def wellcome(term, per):
+    # Wellcome Collection images: only those whose licence is the public domain mark or CC0
+    q = urllib.parse.urlencode({'query': term, 'locations.license': 'pdm,cc-0', 'pageSize': per})
+    res = getjson(f'https://api.wellcomecollection.org/catalogue/v2/images?{q}')
+    out = []
+    for o in res.get('results', []):
+        lic = ''
+        for loc in o.get('locations') or []:
+            lic = ((loc.get('license') or {}).get('id') or lic)
+        thumb = (o.get('thumbnail') or {}).get('url', '')
+        if lic not in ('pdm', 'cc-0') or not thumb:
+            continue
+        img = thumb.replace('/info.json', '/full/400,/0/default.jpg')
+        src = o.get('source') or {}
+        out.append({'source': 'Wellcome', 'id': o.get('id'), 'title': src.get('title', ''), 'kind': src.get('type', ''),
+                    'culture': '', 'date': '', 'material': '',
+                    'licence': 'Public domain mark' if lic == 'pdm' else 'CC0', 'credit': 'Wellcome Collection',
+                    'page': f"https://wellcomecollection.org/works/{src.get('id', '')}", 'image': img})
+    return out
+
+
+# More sources go here, each a function (term, per) -> list of dicts with the same keys as above,
+# keeping only public-domain or CC0 images. See research/ADD_SOURCES.md.
+SOURCES = {'met': met, 'cleveland': cleveland, 'chicago': chicago, 'wellcome': wellcome}
 FIELDS = ['row', 'term', 'source', 'id', 'title', 'kind', 'culture', 'date', 'material',
           'licence', 'credit', 'page', 'image', 'file']
 
@@ -165,6 +192,14 @@ def main():
         with CSV.open('w', newline='', encoding='utf-8') as f:
             w = csv.DictWriter(f, fieldnames=FIELDS, extrasaction='ignore'); w.writeheader(); w.writerows(rows)
         print(f'\n{len(rows)} candidates in {CSV.relative_to(HERE.parent)}, pictures in {OUT.relative_to(HERE.parent)}/')
+    if rows and not a.dry:
+        from collections import Counter
+        by = Counter((r['row'], r['source']) for r in rows)
+        srcs = sorted({s for _, s in by})
+        print('\nCandidates by row and archive:')
+        print('  ' + 'row'.ljust(11) + ''.join(s[:10].ljust(11) for s in srcs))
+        for row in WANTED:
+            print('  ' + row.ljust(11) + ''.join(str(by.get((row, s), 0)).ljust(11) for s in srcs))
     if problems:
         print(f'\n{len(problems)} searches or pictures failed (the rest are fine):')
         for p in problems[:30]:
