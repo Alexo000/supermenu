@@ -43,6 +43,15 @@ When the objects or tasks change, `build.py` adds the next version (`SM3-`, …)
 
 Nothing a visitor picks is stored.
 
+## Published answers
+
+Visitors can type in the box on a sheet (it prints with their text). "Publish anonymously" sends only the task number,
+the text and the page language to the Google Form "Supermenu answers"; nothing else about the visitor is recorded.
+Answers land in the sheet "Supermenu answers (Respuestas)", tab 'Respuestas de formulario 1', with an Approved tick box
+and a Review note. The Approved tab lists ticked answers only and is published as CSV; the page shows those under
+each task. A daily scheduled task (8:49, London) ticks the clearly fine ones and holds the rest with a note.
+The form address, field names and CSV address are `ANSWERS` in `template.html`; empty values switch publishing off.
+
 The archive search and the picking of new objects live in `research/`: `search.py` finds candidates,
 `make_review.py` makes the page to choose them, `fetch_large.py` gets bigger pictures, `cutout.py` cuts them out,
 `add_objects.py` added the 91 picks of 11 October 2026. Before a wider launch: full credits for each object (museum, object, licence),
