@@ -92,7 +92,24 @@ body.embed[data-mode="full"] .tray{position:relative}
 .sheet{background:var(--sheet);width:min(100%,520px);aspect-ratio:210/297;max-width:100%;padding:6% 7%;display:grid;grid-template-rows:auto auto 1fr auto;gap:clamp(10px,2.6vw,18px);box-shadow:0 1px 0 rgba(0,0,51,.15),0 10px 30px rgba(0,0,51,.12)}
 .sheet-top{display:flex;flex-wrap:wrap;white-space:nowrap;justify-content:space-between;gap:8px;font-family:var(--f-num);font-size:clamp(15px,3.6vw,20px);line-height:1;border-bottom:1px solid var(--ink);padding-bottom:8px}
 .task{font-family:var(--f-text);font-weight:600;font-size:clamp(19px,4.6vw,30px);line-height:1.18;letter-spacing:-.01em;text-wrap:balance;margin:0}
-.space{border:1.5px solid var(--ink);min-height:0}
+.space{border:1.5px solid var(--ink);min-height:0;display:grid}
+/* writing on screen: the box takes typing; printing shows the same words */
+.write{width:100%;height:100%;min-height:6em;border:0;resize:none;background:transparent;color:var(--ink);font-family:var(--f-text);font-size:clamp(14px,3.2vw,17px);line-height:1.45;padding:10px 12px}
+.write:focus{outline:2px solid var(--mark);outline-offset:-2px}
+.write::placeholder{color:var(--soft);opacity:.7}
+.written{display:none;white-space:pre-wrap;font-size:13pt;line-height:1.45;padding:4mm 5mm}
+/* under each sheet, on screen only: publish what you wrote; read what others wrote */
+.extra{width:min(100%,520px);display:grid;gap:10px;font-size:14px}
+.extra[hidden]{display:none}
+.publish{justify-items:start}
+.publish .confirm{background:var(--ground);padding:12px 14px;display:grid;gap:10px;width:100%}
+.publish .confirm q{display:block;white-space:pre-wrap;quotes:none;border-left:3px solid var(--mark);padding-left:10px;max-height:9em;overflow:auto}
+.publish .row{display:flex;flex-wrap:wrap;gap:8px}
+.publish .said{color:var(--ink);margin:0}
+.others h3{font-family:var(--f-num);font-weight:400;font-size:20px;line-height:1;margin:6px 0 0}
+.others ol{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.others li{background:var(--ground);padding:10px 12px;white-space:pre-wrap;overflow-wrap:anywhere}
+.others li small{display:block;color:var(--soft);font-family:var(--f-num);font-size:15px;margin-top:4px}
 .sheet-foot{display:grid;gap:8px}
 .ticks{display:flex;flex-wrap:wrap;gap:8px 22px}
 .done{display:flex;align-items:center;gap:8px;font-family:var(--f-num);font-size:clamp(17px,4vw,22px);line-height:1;white-space:nowrap}
@@ -111,10 +128,12 @@ footer{font-size:12.5px;color:var(--soft);max-width:70ch;border-top:1px solid va
   @page{size:A4;margin:0}
   html,body{background:#fff}
   .wrap{display:block;padding:0;max-width:none}
-  .wrap>*:not(.answer),.answer>*:not(.sheets){display:none!important}
+  .wrap>*:not(.answer),.answer>*:not(.sheets),.extra{display:none!important}
+  .write{display:none}
+  .written{display:block}
   .answer,.sheets{display:block;padding:0;background:none}
   .sheet{width:210mm;height:296mm;break-inside:avoid;break-after:page;aspect-ratio:auto;max-width:none;padding:16mm 16mm 14mm;box-shadow:none;animation:none;gap:7mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .sheet:last-child{break-after:auto}
+  .sheet:last-of-type{break-after:auto}
   .sheet-top{font-size:15pt}
   .task{font-size:26pt}
   .done{font-size:16pt}
@@ -193,7 +212,11 @@ const WORDS={
      go:{case:'Show my task',full:'Compose my tasks'},reshuffle:{case:'Another set of objects',full:'Shuffle the case'},
      copy:{one:'Copy the task',many:'Copy the tasks'},copied:'Copied.',copyFail:'Select the task text to copy it.',
      next:{one:'Another task',many:'Other tasks'},again:'Start again',
-     note:'Do it in the box, in your own time. Nothing you pick is kept.',print:{one:'Print the sheet',many:'Print the sheets'},
+     note:'Do it in the box, on paper or here on screen. Nothing you pick is kept, and what you write stays on this page unless you publish it.',
+     write:'Write here, or print the sheet and write on it.',
+     publish:'Publish anonymously',confirm:'This will appear under this task for anyone to read, with no name. It shows once it has been checked, and it cannot be taken back.',
+     yes:'Publish',no:'Not yet',sent:'Sent. It will appear under this task once it has been checked, usually within a day.',
+     others:'What others wrote',more:'Show more',print:{one:'Print the sheet',many:'Print the sheets'},
      done:'Done',nfm:'Not for me',ret:(c,tag)=>`Tick a box. If you like, post a photo of the sheet with <b>${tag}</b>. Share only what you are happy to show.`,
      credits:'Objects 001 to 157 were photographed in UK museum collections, gathered for the COSMORAMA Supermenu (2017). Images from the British Museum: © The Trustees of the British Museum, shared under CC BY-NC-SA 4.0. Objects 158 to 248 come from the open-access collections of the Art Institute of Chicago, the Cleveland Museum of Art, the Metropolitan Museum of Art, the Rijksmuseum and museums sharing through Europeana, in the public domain or under CC0. Full object credits to follow.',
      pickLabel:(no,on)=>`Object ${no}${on?', chosen':''}`},
@@ -204,7 +227,11 @@ const WORDS={
      go:{case:'Ver mi tarea',full:'Componer mis tareas'},reshuffle:{case:'Otros objetos',full:'Revolver la vitrina'},
      copy:{one:'Copiar la tarea',many:'Copiar las tareas'},copied:'Copiado.',copyFail:'Selecciona el texto de las tareas para copiarlo.',
      next:{one:'Otra tarea',many:'Otras tareas'},again:'Empezar de nuevo',
-     note:'Hazla en el recuadro, a tu ritmo. No se guarda nada de lo que eliges.',print:{one:'Imprimir la hoja',many:'Imprimir las hojas'},
+     note:'Hazla en el recuadro, en papel o aquí en pantalla. No se guarda nada de lo que eliges, y lo que escribes se queda en esta página a menos que lo publiques.',
+     write:'Escribe aquí, o imprime la hoja y escribe en ella.',
+     publish:'Publicar sin nombre',confirm:'Aparecerá bajo esta tarea para que cualquiera la lea, sin nombre. Se mostrará cuando se haya revisado, y no se puede retirar.',
+     yes:'Publicar',no:'Todavía no',sent:'Enviado. Aparecerá bajo esta tarea cuando se haya revisado, normalmente en un día.',
+     others:'Lo que escribieron otras personas',more:'Ver más',print:{one:'Imprimir la hoja',many:'Imprimir las hojas'},
      done:'Hecha',nfm:'No es para mí',ret:(c,tag)=>`Marca una casilla. Si quieres, publica una foto de la hoja con <b>${tag}</b>. Comparte solo lo que quieras mostrar.`,
      credits:'Los objetos 001 a 157 se fotografiaron en colecciones de museos del Reino Unido y se reunieron para el Supermenu de COSMORAMA (2017). Imágenes del British Museum: © The Trustees of the British Museum, bajo licencia CC BY-NC-SA 4.0. Los objetos 158 a 248 vienen de las colecciones de acceso abierto del Art Institute of Chicago, el Cleveland Museum of Art, el Metropolitan Museum of Art, el Rijksmuseum y museos que comparten a través de Europeana, en dominio público o bajo CC0. Créditos completos por venir.',
      pickLabel:(no,on)=>`Objeto ${no}${on?', elegido':''}`}
@@ -246,6 +273,53 @@ function compose(picks,shift){
     const t=free[shift%free.length];used.add(t.n);out.push({ids,task:t,code:encodeSheet(ids,t.n)});
   }
   return out;
+}
+/* Published answers. Writing stays on the page; "Publish anonymously" sends only the task number, the text and
+   the page language to a Google Form. Approved answers come back from a published tab of its sheet (CSV).
+   Leave form or csv empty to switch that half off. */
+const ANSWERS={form:'',fields:{task:'',answer:'',lang:''},csv:''};
+const TEXTS={};            // what has been typed, by sheet code, so a re-render keeps it
+const SENT=new Set();      // sheet codes already published from this page
+let SHARED=null;           // task number -> [{text,date}], loaded once
+function parseCSV(t){const rows=[];let r=[],f='',q=false;
+  for(let i=0;i<t.length;i++){const c=t[i];
+    if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
+    else if(c==='"')q=true;else if(c===','){r.push(f);f=''}else if(c==='\n'){r.push(f);rows.push(r);r=[];f=''}else if(c!=='\r')f+=c}
+  if(f||r.length){r.push(f);rows.push(r)}return rows}
+function loadShared(){
+  if(SHARED||!ANSWERS.csv)return Promise.resolve();
+  return fetch(ANSWERS.csv,{cache:'no-store'}).then(r=>r.ok?r.text():'').then(t=>{SHARED={};
+    for(const [task,text,,date] of parseCSV(t).slice(1)){if(!text||!task)continue;(SHARED[task]=SHARED[task]||[]).push({text,date:date||''})}
+    for(const k in SHARED)SHARED[k].reverse();}).catch(()=>{SHARED={}});
+}
+function publishAnswer(n,text){
+  if(!ANSWERS.form)return Promise.resolve();
+  const b=new URLSearchParams();b.append(ANSWERS.fields.task,String(n));b.append(ANSWERS.fields.answer,text);b.append(ANSWERS.fields.lang,lang);
+  return fetch(ANSWERS.form,{method:'POST',mode:'no-cors',body:b}).catch(()=>{});
+}
+function othersBlock(n){
+  const sec=el('section','extra others');sec.hidden=true;
+  loadShared().then(()=>{const list=(SHARED&&SHARED[String(n)])||[];if(!list.length)return;
+    sec.textContent='';sec.append(el('h3',null,W().others));const ol=el('ol');let shown=0;
+    const more=el('button','btn quiet',W().more);more.type='button';
+    const add=k=>{for(const a of list.slice(shown,shown+k)){const li=el('li',null,a.text);li.append(el('small',null,a.date));ol.append(li)}shown=Math.min(list.length,shown+k);more.hidden=shown>=list.length};
+    add(3);more.addEventListener('click',()=>add(5));sec.append(ol,more);sec.hidden=false});
+  return sec;
+}
+function publishBlock(sh,ta){
+  const sec=el('section','extra publish');if(!ANSWERS.form){sec.hidden=true;return sec}
+  const draw=()=>{sec.textContent='';
+    if(SENT.has(sh.code)){sec.append(el('p','said',W().sent));return}
+    const b=el('button','btn',W().publish);b.type='button';b.disabled=!ta.value.trim();
+    ta.addEventListener('input',()=>{b.disabled=!ta.value.trim()});
+    b.addEventListener('click',()=>{sec.textContent='';const box=el('div','confirm');
+      box.append(el('q',null,ta.value.trim()),el('p','said',W().confirm));
+      const row=el('div','row'),yes=el('button','btn primary',W().yes),no=el('button','btn',W().no);yes.type=no.type='button';
+      no.addEventListener('click',draw);
+      yes.addEventListener('click',()=>{yes.disabled=no.disabled=true;publishAnswer(sh.task.n,ta.value.trim().slice(0,1200)).then(()=>{SENT.add(sh.code);draw()})});
+      row.append(yes,no);box.append(row);sec.append(box);yes.focus()});
+    sec.append(b)};
+  draw();return sec;
 }
 // For later (stored picks): one place where a finished choice could be recorded. Nothing is kept now.
 function recordPicks(sheets){/* intentionally empty in this version */}
@@ -346,8 +420,12 @@ function renderSheets(animate){
     const chosen=el('div','chosen');
     for(const id of sh.ids){const f=el('figure'),img=el('img');img.src=OBJ[id].img;img.alt='';f.append(img,el('figcaption',null,pad(id)));chosen.append(f)}
     foot.append(ticks,ret,chosen);
-    const space=el('div','space');space.setAttribute('aria-hidden','true');
-    a.append(top,el('p','task',sh.task[lang]),space,foot);box.append(a);
+    const space=el('div','space'),ta=el('textarea','write'),out=el('div','written');
+    ta.placeholder=W().write;ta.maxLength=1200;ta.setAttribute('aria-label',W().write);
+    ta.value=TEXTS[sh.code]||'';out.textContent=ta.value;
+    ta.addEventListener('input',()=>{TEXTS[sh.code]=ta.value;out.textContent=ta.value});
+    space.append(ta,out);
+    a.append(top,el('p','task',sh.task[lang]),space,foot);box.append(a,publishBlock(sh,ta),othersBlock(sh.task.n));
   });
   $('toast').textContent='';
 }
