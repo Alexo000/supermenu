@@ -25,7 +25,8 @@ operations are its own copies, made on 2026-10-11, and can change without touchi
 - `template.html` is the page; `codec.js` makes and reads the sheet codes; `decoder_template.html` is the decoder.
 - `python3 build.py` rebuilds everything below after any change. It stops and says what is wrong if an
   object or task names an operation it does not know.
-- `site/index.html` is the whole page, ready for Netlify: drag the `site` folder onto the site's Deploys page.
+- `site/index.html` is the whole page. GitHub Pages publishes the `site` folder at https://alexo000.github.io/supermenu/
+  each time a change to it is pushed to GitHub (`.github/workflows/pages.yml`). The code lives at github.com/Alexo000/supermenu.
 - `decoder.html` reads the codes on returned sheets: the three objects and the task. For you only, as it names
   the operations; it is not part of `site`. Open it from disk.
 - `embed.html` is the snippet for a Squarespace Code block: the page sets its own height on the host page

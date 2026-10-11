@@ -9,7 +9,7 @@
 #                           so codes on sheets already printed keep reading correctly.
 #
 # Writes:
-#   site/index.html  the page for Netlify and ramos-saavedra.com (a whole document, with printing)
+#   site/index.html  the page GitHub Pages publishes, embedded on ramos-saavedra.com (a whole document, with printing)
 #   decoder.html     reads the codes on returned sheets; for Alejandro only, kept off the site
 #   supermenu.html   the private preview on claude.ai (no printing)
 #

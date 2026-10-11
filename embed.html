@@ -1,22 +1,23 @@
 <!-- Supermenu: paste all of this into one Squarespace Code block (Code block settings: HTML, "Display source" off).
-     Change SITE to the address Netlify gives the Supermenu site, with no slash at the end. -->
-<iframe id="supermenu-frame" title="Supermenu" src="https://supermenu-ars.netlify.app/"
+     SITE is where GitHub Pages publishes the Supermenu site, with no slash at the end. -->
+<iframe id="supermenu-frame" title="Supermenu" src="https://alexo000.github.io/supermenu/"
   style="display:block;width:100%;height:1200px;border:0;overflow:hidden" scrolling="no"
   allow="clipboard-write"></iframe>
 <script>
 (function(){
-  var SITE='https://supermenu-ars.netlify.app';
+  var SITE='https://alexo000.github.io/supermenu';
+  var ORIGIN=SITE.split('/').slice(0,3).join('/'); // messages come from the site's origin, without the path
   var frame=document.getElementById('supermenu-frame');
   frame.src=SITE+'/';
   var OFFSET=0; // if the site has a fixed header, its height in pixels, so the tray stops below it
   function view(){ // tell the page how far its top has gone above the screen, so the full view's tray can follow
-    try{frame.contentWindow.postMessage({supermenuView:Math.round(OFFSET-frame.getBoundingClientRect().top)},SITE)}catch(err){}
+    try{frame.contentWindow.postMessage({supermenuView:Math.round(OFFSET-frame.getBoundingClientRect().top)},ORIGIN)}catch(err){}
   }
   window.addEventListener('scroll',view,{passive:true});
   window.addEventListener('resize',view);
   frame.addEventListener('load',view);
   window.addEventListener('message',function(e){
-    if(e.origin!==SITE||!e.data||!e.data.supermenu)return;
+    if(e.origin!==ORIGIN||!e.data||!e.data.supermenu)return;
     if(typeof e.data.h==='number'){frame.style.height=e.data.h+'px';view();}
     if(typeof e.data.y==='number'){
       var top=frame.getBoundingClientRect().top+window.pageYOffset+e.data.y-12;
