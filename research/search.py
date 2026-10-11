@@ -18,7 +18,7 @@ Afterwards Claude lays the pictures out on contact sheets so you can choose.
 The museum sites were not reachable from Claude's workspace, so this script has not been run
 against them yet: if a source answers in an unexpected way, it is skipped and noted, and the rest carry on.
 """
-import argparse, csv, json, pathlib, re, sys, time, urllib.parse, urllib.request
+import argparse, csv, json, os, pathlib, re, sys, time, urllib.parse, urllib.request
 
 HERE = pathlib.Path(__file__).resolve().parent
 OUT = HERE / 'candidates'
@@ -48,6 +48,7 @@ def get(url, tries=3):
             h = {'User-Agent': UA, 'AIC-User-Agent': UA}
             if 'artic.edu/iiif' in url:
                 h['Referer'] = 'https://www.artic.edu/'  # Chicago's image server asks for it
+            url = urllib.parse.quote(url, safe=':/?&=%#,!+;@~')  # some image addresses carry spaces
             req = urllib.request.Request(url, headers=h)
             with urllib.request.urlopen(req, timeout=30) as r:
                 return r.read()
@@ -69,7 +70,10 @@ def met(term, per):
     for oid in ids[:per * 4]:  # some records are not open access; look a little further
         if len(out) >= per:
             break
-        o = getjson(f'https://collectionapi.metmuseum.org/public/collection/v1/objects/{oid}')
+        try:  # a few listed objects have no record any more; skip them, not the whole search
+            o = getjson(f'https://collectionapi.metmuseum.org/public/collection/v1/objects/{oid}')
+        except Exception:
+            continue
         time.sleep(0.1)
         if not o.get('isPublicDomain') or not o.get('primaryImageSmall'):
             continue
@@ -138,9 +142,169 @@ def wellcome(term, per):
     return out
 
 
+# Dutch words for the Rijksmuseum, whose search answers far better in Dutch; terms not listed go as they are
+DUTCH = {'seal': 'zegelstempel', 'stamp seal': 'zegelstempel', 'cylinder seal': 'rolzegel', 'signet ring': 'zegelring',
+         'balance weight': 'gewicht', 'sundial': 'zonnewijzer', 'abacus': 'telraam', 'measuring rod': 'maatstok',
+         'tally stick': 'kerfstok', 'scale weight': 'muntgewicht', 'dice': 'dobbelsteen', 'astragal': 'bikkel',
+         'game piece': 'speelstuk', 'gaming counter': 'speelpenning', 'divination': 'waarzeggerij',
+         'key': 'sleutel', 'padlock': 'hangslot', 'token': 'penning', 'tessera': 'tessera',
+         'repaired bowl': 'gerepareerd', 'mended': 'gerepareerd', 'basket': 'mand', 'box': 'doos',
+         'purse': 'beurs', 'case': 'etui', 'casket': 'kistje', 'model boat': 'scheepsmodel',
+         'house model': 'poppenhuis', 'toy': 'speelgoed', 'doll': 'pop', 'miniature': 'miniatuur',
+         'glass vessel': 'glas', 'textile': 'textiel', 'feather': 'veer', 'basketry': 'vlechtwerk',
+         'bone carving': 'been'}
+LD = {'Accept': 'application/ld+json'}
+
+
+def _ld(url):
+    req = urllib.request.Request(url, headers={'User-Agent': UA, **LD})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.loads(r.read().decode('utf-8'))
+
+
+def _L(x):
+    # Linked Art gives one value or a list of them; always hand back a list of dicts
+    x = x if isinstance(x, list) else [x] if x else []
+    return [v if isinstance(v, dict) else {'@value': v, 'id': v, 'content': v} for v in x]
+
+
+def _en(notes):
+    # the English label of a Linked Art notation, else the first one
+    notes = _L(notes)
+    for n in notes:
+        if n.get('@language') == 'en':
+            return n.get('@value', '')
+    return notes[0].get('@value', '') if notes else ''
+
+
+def rijks(term, per):
+    # keyless Linked Art search: the word as an object type (Dutch, then English), then in titles, then descriptions
+    word = DUTCH.get(term, term)
+    items = []
+    for field, w in (('type', word), ('type', term), ('title', word), ('description', word)):
+        q = urllib.parse.urlencode({field: w, 'imageAvailable': 'true'})
+        items = getjson(f'https://data.rijksmuseum.nl/search/collection?{q}').get('orderedItems') or []
+        if items:
+            break
+    out = []
+    for it in items[:per * 3]:
+        if len(out) >= per:
+            break
+        try:  # one odd record is skipped, not the whole search
+            o = _ld(it['id'])
+            rights = [c.get('id', '') for s in _L(o.get('subject_of')) for r in _L(s.get('subject_to'))
+                      for c in _L(r.get('classified_as'))]
+            if not any('publicdomain/zero' in r or 'publicdomain/mark' in r for r in rights):
+                continue
+            vis = _ld(_L(o.get('shows'))[0]['id'])
+            dig = _ld(_L(vis.get('digitally_shown_by'))[0]['id'])
+            img = _L(dig.get('access_point'))[0].get('id', '').replace('/full/max/', '/full/400,/')
+            if not img:
+                continue
+            ids = _L(o.get('identified_by'))
+            names = [n for n in ids if n.get('type') == 'Name']
+            title = next((n.get('content', '') for n in names
+                          if any('300388277' in l.get('id', '') for l in _L(n.get('language')))),
+                         names[0].get('content', '') if names else '')
+            num = next((n.get('content', '') for n in ids if n.get('type') == 'Identifier'), '')
+            prod = _L(o.get('produced_by'))[:1] or [{}]
+            prod = prod[0]
+            date = next((n.get('content', '') for t in _L(prod.get('timespan')) for n in _L(t.get('identified_by'))), '')
+            page = next((a.get('id') for s in _L(o.get('subject_of')) for d in _L(s.get('digitally_carried_by'))
+                         for a in _L(d.get('access_point'))), f'https://www.rijksmuseum.nl/en/collection/{num}')
+            out.append({'source': 'Rijksmuseum', 'id': it['id'].rsplit('/', 1)[-1], 'title': title,
+                        'kind': '; '.join(_en(c.get('notation')) for c in _L(o.get('classified_as')) if c.get('notation')),
+                        'culture': '; '.join(p.get('_label', '') for p in _L(prod.get('took_place'))), 'date': date,
+                        'material': '; '.join(_en(m.get('notation')) for m in _L(o.get('made_of'))),
+                        'licence': 'Public domain / CC0 (Rijksmuseum)', 'credit': f'Rijksmuseum, Amsterdam, {num}',
+                        'page': page, 'image': img})
+        except Exception:
+            continue
+        time.sleep(0.1)
+    return out
+
+
+def smk(term, per):
+    # Statens Museum for Kunst, Copenhagen: mostly paintings and prints; only public-domain images
+    q = urllib.parse.urlencode({'keys': term, 'rows': per, 'filters': '[has_image:true],[public_domain:true]'})
+    res = getjson(f'https://api.smk.dk/api/v1/art/search/?{q}')
+    out = []
+    for o in res.get('items') or []:
+        thumb = o.get('image_thumbnail') or ''
+        if not o.get('public_domain') or not thumb:
+            continue
+        num = o.get('object_number', '')
+        title = next((t.get('title', '') for t in o.get('titles') or [] if t.get('language') == 'engelsk'),
+                     ((o.get('titles') or [{}])[0]).get('title', ''))
+        out.append({'source': 'SMK', 'id': num, 'title': title,
+                    'kind': '; '.join(n.get('name', '') for n in o.get('object_names') or []),
+                    'culture': '; '.join(p.get('creator', '') for p in o.get('production') or []),
+                    'date': ((o.get('production_date') or [{}])[0]).get('period', ''),
+                    'material': '; '.join((o.get('techniques') or []) + (o.get('materials') or [])),
+                    'licence': 'Public domain (SMK Open)', 'credit': 'SMK, Statens Museum for Kunst, ' + num,
+                    'page': o.get('frontend_url') or f'https://open.smk.dk/artwork/image/{num}',
+                    'image': re.sub(r'/full/![0-9]+,/', '/full/!400,/', thumb)})
+    return out
+
+
+def europeana(term, per):
+    # many smaller European museums; the public demo key works, your own goes in EUROPEANA_KEY
+    key = os.environ.get('EUROPEANA_KEY', 'api2demo')
+    q = urllib.parse.urlencode([('wskey', key), ('query', term), ('rows', per * 2), ('media', 'true'),
+                                ('thumbnail', 'true'), ('qf', 'TYPE:IMAGE'), ('qf', 'RIGHTS:*publicdomain*')])
+    res = getjson(f'https://api.europeana.eu/record/v2/search.json?{q}')
+    out = []
+    for o in res.get('items') or []:
+        if len(out) >= per:
+            break
+        rights = ' '.join(o.get('rights') or [])
+        prev = (o.get('edmPreview') or [''])[0]
+        if not prev or not ('publicdomain/mark' in rights or 'publicdomain/zero' in rights):
+            continue
+        first = lambda k: (o.get(k) or [''])[0]
+        out.append({'source': 'Europeana', 'id': o.get('id', '').strip('/').replace('/', '_'),
+                    'title': first('title'), 'kind': first('edmConceptLabel') if isinstance(first('edmConceptLabel'), str)
+                    else (first('edmConceptLabel') or {}).get('def', ''),
+                    'culture': first('country'), 'date': first('year'), 'material': '',
+                    'licence': 'CC0' if 'publicdomain/zero' in rights else 'Public domain mark',
+                    'credit': f"{first('dataProvider')} via Europeana",
+                    'page': (o.get('guid') or '').split('?')[0], 'image': prev + '&size=w400'})
+    return out
+
+
+def smithsonian(term, per):
+    # Smithsonian Open Access; needs SI_API_KEY (free at api.data.gov), keeps only CC0 images
+    key = os.environ.get('SI_API_KEY')
+    if not key:
+        raise RuntimeError('skipped: no SI_API_KEY set')
+    q = urllib.parse.urlencode({'api_key': key, 'rows': per * 2,
+                                'q': f'"{term}" AND online_media_type:"Images" AND media_usage:"CC0"'})
+    rows = (getjson(f'https://api.si.edu/openaccess/api/v1.0/search?{q}').get('response') or {}).get('rows') or []
+    out = []
+    for o in rows:
+        if len(out) >= per:
+            break
+        c = o.get('content') or {}
+        dn, ix = c.get('descriptiveNonRepeating') or {}, c.get('indexedStructured') or {}
+        media = [m for m in (dn.get('online_media') or {}).get('media') or []
+                 if m.get('type') == 'Images' and (m.get('usage') or {}).get('access') == 'CC0' and m.get('idsId')]
+        if not media:
+            continue
+        mat = next((f.get('content', '') for f in (c.get('freetext') or {}).get('physicalDescription') or []
+                    if f.get('label') == 'Medium'), '')
+        out.append({'source': 'Smithsonian', 'id': o.get('id', ''), 'title': o.get('title', ''),
+                    'kind': '; '.join((ix.get('object_type') or [])[:2]),
+                    'culture': '; '.join((ix.get('culture') or []) + (ix.get('place') or [])[:1]),
+                    'date': '; '.join(ix.get('date') or []), 'material': mat, 'licence': 'CC0 (Smithsonian Open Access)',
+                    'credit': f"Smithsonian Institution, {dn.get('data_source', '')}",
+                    'page': dn.get('record_link') or dn.get('guid', ''),
+                    'image': f"https://ids.si.edu/ids/deliveryService?id={media[0]['idsId']}&max=400"})
+    return out
+
+
 # More sources go here, each a function (term, per) -> list of dicts with the same keys as above,
 # keeping only public-domain or CC0 images. See research/ADD_SOURCES.md.
-SOURCES = {'met': met, 'cleveland': cleveland, 'chicago': chicago, 'wellcome': wellcome}
+SOURCES = {'met': met, 'cleveland': cleveland, 'chicago': chicago, 'wellcome': wellcome, 'rijks': rijks, 'smk': smk, 'europeana': europeana, 'smithsonian': smithsonian}
 FIELDS = ['row', 'term', 'source', 'id', 'title', 'kind', 'culture', 'date', 'material',
           'licence', 'credit', 'page', 'image', 'file']
 
@@ -154,6 +318,8 @@ def main():
     a = ap.parse_args()
 
     seen, rows, problems = set(), [], []
+    if not os.environ.get('SI_API_KEY') and a.source in (None, 'smithsonian'):
+        problems.append('smithsonian: skipped, no SI_API_KEY set (free at api.data.gov)')
     if CSV.exists() and not a.dry:  # carry on from an earlier run without repeating it
         with CSV.open(newline='', encoding='utf-8') as f:
             for r in csv.DictReader(f):
@@ -164,6 +330,8 @@ def main():
         for term in terms:
             for name, fn in SOURCES.items():
                 if a.source and name != a.source:
+                    continue
+                if name == 'smithsonian' and not os.environ.get('SI_API_KEY'):
                     continue
                 try:
                     found = fn(term, a.per)
@@ -179,7 +347,7 @@ def main():
                     if a.dry:
                         continue
                     folder = OUT / row; folder.mkdir(parents=True, exist_ok=True)
-                    file = folder / f"{o['source'].lower()}-{o['id']}.jpg"
+                    file = folder / (f"{o['source'].lower()}-" + re.sub(r'[^A-Za-z0-9._-]', '_', str(o['id'])) + '.jpg')
                     try:
                         file.write_bytes(get(o['image']))
                     except Exception as e:
