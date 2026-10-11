@@ -184,7 +184,7 @@ const WORDS={
      next:{one:'Another task',many:'Other tasks'},again:'Start again',
      note:'Do it in the box, in your own time. Nothing you pick is kept.',print:{one:'Print the sheet',many:'Print the sheets'},
      done:'Done',nfm:'Not for me',ret:(c,tag)=>`Tick a box. If you like, post a photo of the sheet with <b>${tag}</b>. Share only what you are happy to show.`,
-     credits:'Objects photographed in UK museum collections, gathered for the COSMORAMA Supermenu (2017). Images from the British Museum: © The Trustees of the British Museum, shared under CC BY-NC-SA 4.0. Full object credits to follow.',
+     credits:'Objects 001 to 157 were photographed in UK museum collections, gathered for the COSMORAMA Supermenu (2017). Images from the British Museum: © The Trustees of the British Museum, shared under CC BY-NC-SA 4.0. Objects 158 to 248 come from the open-access collections of the Art Institute of Chicago, the Cleveland Museum of Art, the Metropolitan Museum of Art, the Rijksmuseum and museums sharing through Europeana, in the public domain or under CC0. Full object credits to follow.',
      pickLabel:(no,on)=>`Object ${no}${on?', chosen':''}`},
  es:{lede:{case:'Elige tres objetos de la vitrina. La máquina te responde con una cosa por hacer.',full:'Elige seis, nueve o doce objetos. La máquina te responde con una tarea por cada tres.'},
      modeCase:'La vitrina',modeFull:'Vista completa',
@@ -195,7 +195,7 @@ const WORDS={
      next:{one:'Otra tarea',many:'Otras tareas'},again:'Empezar de nuevo',
      note:'Hazla en el recuadro, a tu ritmo. No se guarda nada de lo que eliges.',print:{one:'Imprimir la hoja',many:'Imprimir las hojas'},
      done:'Hecha',nfm:'No es para mí',ret:(c,tag)=>`Marca una casilla. Si quieres, publica una foto de la hoja con <b>${tag}</b>. Comparte solo lo que quieras mostrar.`,
-     credits:'Objetos fotografiados en colecciones de museos del Reino Unido, reunidos para el Supermenu de COSMORAMA (2017). Imágenes del British Museum: © The Trustees of the British Museum, bajo licencia CC BY-NC-SA 4.0. Créditos completos por venir.',
+     credits:'Los objetos 001 a 157 se fotografiaron en colecciones de museos del Reino Unido y se reunieron para el Supermenu de COSMORAMA (2017). Imágenes del British Museum: © The Trustees of the British Museum, bajo licencia CC BY-NC-SA 4.0. Los objetos 158 a 248 vienen de las colecciones de acceso abierto del Art Institute of Chicago, el Cleveland Museum of Art, el Metropolitan Museum of Art, el Rijksmuseum y museos que comparten a través de Europeana, en dominio público o bajo CC0. Créditos completos por venir.',
      pickLabel:(no,on)=>`Objeto ${no}${on?', elegido':''}`}
 };
 let lang=(()=>{try{const v=localStorage.getItem('supermenu.lang');if(v==='en'||v==='es')return v}catch(e){}return /^es\b/i.test(navigator.language||'')?'es':'en'})();

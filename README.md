@@ -13,9 +13,11 @@ operations are its own copies, made on 2026-10-11, and can change without touchi
 
 ## Files
 
-- `source/objects.json` and `source/objects/` hold the 157 cut-out objects. An object appears only when it has
-  an `op` (100 do). `excluded: true` marks the 57 kept out: modern artworks and designs, machines, human remains,
-  portraits of real people. `why` is a note for you; `title` and `credit` are for the credits.
+- `source/objects.json` and `source/objects/` hold the 248 cut-out objects. An object appears only when it has
+  an `op` (191 do). 1 to 157 come from the COSMORAMA Supermenu; `excluded: true` marks the 57 of those kept out:
+  modern artworks and designs, machines, human remains, portraits of real people. 158 to 248 are archive picks
+  (public domain or CC0), with the museum page in `source` and its credit line and licence in `credit`.
+  `why` is a note for you; `title` and `credit` are for the credits.
 - `source/tasks.json` holds the 30 tasks (English and Spanish) and the chain of operations each carries.
 - `source/operations.json` holds the operations, with their place on the map (`xy`) and family (`cat`),
   which the engine uses to find the closest task.
@@ -35,7 +37,12 @@ operations are its own copies, made on 2026-10-11, and can change without touchi
 Each version of the code counts against a fixed list of objects and tasks, so printed sheets always read back.
 - `SM-` and four characters: the first 29 objects, three in the order picked (10 October 2026).
 - `SM2-` and five characters: the 100 objects, three kept as a set (11 October 2026).
+- `SM3-` and six characters: the 191 objects, three kept as a set (11 October 2026, with the archive picks).
 When the objects or tasks change, `build.py` adds the next version (`SM3-`, …) by itself and says so.
 
-Nothing a visitor picks is stored. Before a wider launch: full credits for each object (museum, object, licence),
+Nothing a visitor picks is stored.
+
+The archive search and the picking of new objects live in `research/`: `search.py` finds candidates,
+`make_review.py` makes the page to choose them, `fetch_large.py` gets bigger pictures, `cutout.py` cuts them out,
+`add_objects.py` added the 91 picks of 11 October 2026. Before a wider launch: full credits for each object (museum, object, licence),
 or replacement by open-licence images (see the archive search plan).
