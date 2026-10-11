@@ -21,8 +21,8 @@
   },
   {
    "n": 3,
-   "en": "Draw a plan of a house you lived in years ago. Include the furniture.",
-   "es": "Dibuja un esquema de una casa en la que viviste hace años. Incluye muebles.",
+   "en": "Draw a plan of a house you lived in years ago, or walk through it in words. Include the furniture.",
+   "es": "Dibuja un esquema de una casa en la que viviste hace años, o recórrela con palabras. Incluye los muebles.",
    "chain": [
     "ELICIT",
     "CONTAIN"
@@ -93,8 +93,8 @@
   },
   {
    "n": 11,
-   "en": "Make a detailed drawing of a place you have visited only once.",
-   "es": "Haz un dibujo detallado de un lugar que hayas visitado una sola vez.",
+   "en": "Draw or describe in detail a place you have visited only once.",
+   "es": "Dibuja o describe con detalle un lugar que hayas visitado una sola vez.",
    "chain": [
     "ATTEND",
     "LOCATE"
@@ -111,8 +111,8 @@
   },
   {
    "n": 13,
-   "en": "Draw something you lost and never found.",
-   "es": "Dibuja algo que hayas perdido y nunca encontrado.",
+   "en": "Draw or describe something you lost and never found.",
+   "es": "Dibuja o describe algo que hayas perdido y nunca encontrado.",
    "chain": [
     "CONCEAL",
     "ELICIT"
@@ -201,8 +201,8 @@
   },
   {
    "n": 23,
-   "en": "Draw a series of tattoos you would definitely never get. Get one?",
-   "es": "Dibuja una serie de tatuajes que definitivamente nunca te tatuarías. ¿Tatúate uno?",
+   "en": "Draw or describe a series of tattoos you would definitely never get. Get one?",
+   "es": "Dibuja o describe una serie de tatuajes que definitivamente nunca te tatuarías. ¿Tatúate uno?",
    "chain": [
     "EXAGGERATE",
     "RAISE THE COST"
@@ -219,8 +219,8 @@
   },
   {
    "n": 25,
-   "en": "Draw a sketch map to a place you like.",
-   "es": "Dibuja un croquis para ir a un lugar que te gusta.",
+   "en": "Draw a sketch map to a place you like, or write the directions.",
+   "es": "Dibuja un croquis para ir a un lugar que te gusta, o escribe cómo llegar.",
    "chain": [
     "LOCATE",
     "TRANSLATE"

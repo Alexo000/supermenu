@@ -116,6 +116,8 @@ body.embed[data-mode="full"] .tray{position:relative}
 .tick{width:clamp(20px,4.6vw,28px);aspect-ratio:1;border:1.5px solid var(--ink);display:inline-block}
 .return{overflow-wrap:anywhere;font-size:clamp(10px,2.3vw,12.5px);line-height:1.4;margin:0;color:var(--ink)}
 .return b{white-space:nowrap;font-family:var(--f-num);font-weight:400;font-size:1.35em;letter-spacing:.02em}
+/* the tick boxes and the photo line are for the printed sheet only */
+@media screen{.ticks,.return{display:none}}
 .chosen{display:flex;gap:10px;align-items:flex-end;border-top:1px solid var(--rule);padding-top:6px}
 .chosen figure{margin:0;display:grid;justify-items:center;gap:2px}
 .chosen img{height:clamp(28px,7vw,44px);width:auto;max-width:72px;object-fit:contain;filter:grayscale(1)}
