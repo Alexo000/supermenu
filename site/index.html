@@ -62,19 +62,20 @@ h1{font-family:var(--f-num);font-weight:400;font-size:clamp(48px,9vw,84px);line-
 .obj[disabled]{cursor:default}
 .obj[disabled] img{opacity:.45}
 
-/* the tray: below the case of twelve; above the full view, which is long */
+/* the tray sits above the objects and comes down with you as you scroll, so the chosen objects and the next
+   step stay in reach (on the host page, embed.html tells it where to sit) */
 .wrap>header{order:-2}
-body[data-mode="full"] .tray{order:-1}
-/* full view: the tray comes down with you as you scroll (on the host page, embed.html tells it where to sit) */
-body[data-mode="full"] .tray{position:sticky;top:0;z-index:3;background:var(--ground);padding:10px 0 2px;margin:-10px 0 -2px;box-shadow:0 1px 0 var(--rule)}
-body.embed[data-mode="full"] .tray{position:relative}
+.tray{order:-1;position:sticky;top:0;z-index:3;background:var(--ground);padding:10px 0 2px;margin:-10px 0 -2px;box-shadow:0 1px 0 var(--rule)}
+body.embed .tray{position:relative}
 @media (max-width:640px){
-  body[data-mode="full"] .tray{gap:6px 10px}
-  body[data-mode="full"] .slots{gap:6px;padding-bottom:14px}
-  body[data-mode="full"] .group{gap:2px}
-  body[data-mode="full"] .slots.small .slot{width:26px;height:34px;font-size:13px}
-  body[data-mode="full"] .slots.small .slot.full::after{font-size:12px;bottom:-14px}
-  body[data-mode="full"] .btn{padding:8px 12px}
+  body .tray{gap:6px 10px}
+  body .slots{gap:6px;padding-bottom:14px}
+  body .group{gap:2px}
+  body .slot{width:40px;height:52px;font-size:17px}
+  body .slots.small .slot{width:26px;height:34px;font-size:13px}
+  body .slot.full::after{font-size:13px;bottom:-15px}
+  body .slots.small .slot.full::after{font-size:12px;bottom:-14px}
+  body .tray .btn{padding:8px 12px}
 }
 /* the tray */
 .tray{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px}
@@ -253,13 +254,14 @@ function decodeSheet(code){
 
 const WORDS={
  en:{lede:{case:'Pick three objects from the case. The machine answers with one thing to do.',full:'Pick six, nine or twelve objects. The machine answers with one task for every three.'},
-     modeCase:'The case',modeFull:'Full view',
+     modeCase:'One task',modeFull:'Several tasks',
      case:'The case',caseFull:'All the objects',set:n=>`Set ${n}`,many:n=>`${n} objects`,
-     count:{case:n=>`${n} of 3 chosen`,full:n=>`${n} chosen. Pick 6, 9 or 12.`},
+     count:{case:n=>n?`${n} of 3 chosen · tap one again to remove it`:'Pick three objects.',full:n=>n?`${n} chosen · 6, 9 or 12 · tap one again to remove it`:'Pick 6, 9 or 12 objects.'},
      go:{case:'Show my task',full:'Compose my tasks'},reshuffle:{case:'Another set of objects',full:'Shuffle the case'},
      copy:{one:'Copy the task',many:'Copy the tasks'},copied:'Copied.',copyFail:'Select the task text to copy it.',
      next:{one:'Another task',many:'Other tasks'},again:'Start again',
-     note:'Do it in the box, on paper or here on screen. Nothing you pick is kept, and what you write stays on this page unless you publish it.',
+     note:'Do it in the box, on screen or on paper. What you write stays on this page and is gone when you leave, unless you save it, print it or publish it. Nothing you pick is kept.',
+     save:'Save as an image',
      write:'Write here, or print the sheet and write on it.',
      publish:'Publish anonymously',confirm:'This will appear under this task for anyone to read, with no name. It shows once it has been checked, and it cannot be taken back.',
      yes:'Publish',no:'Not yet',sent:'Sent. It will appear under this task once it has been checked, usually within a day.',
@@ -268,13 +270,14 @@ const WORDS={
      credits:'Objects 001 to 157 were photographed in UK museum collections, gathered for the COSMORAMA Supermenu (2017). Images from the British Museum: © The Trustees of the British Museum, shared under CC BY-NC-SA 4.0. Objects 158 to 248 come from the open-access collections of the Art Institute of Chicago, the Cleveland Museum of Art, the Metropolitan Museum of Art, the Rijksmuseum and museums sharing through Europeana, in the public domain or under CC0. Full object credits to follow.',
      pickLabel:(no,on)=>`Object ${no}${on?', chosen':''}`},
  es:{lede:{case:'Elige tres objetos de la vitrina. La máquina te responde con una cosa por hacer.',full:'Elige seis, nueve o doce objetos. La máquina te responde con una tarea por cada tres.'},
-     modeCase:'La vitrina',modeFull:'Vista completa',
+     modeCase:'Una tarea',modeFull:'Varias tareas',
      case:'La vitrina',caseFull:'Todos los objetos',set:n=>`Serie ${n}`,many:n=>`${n} objetos`,
-     count:{case:n=>`${n} de 3 elegidos`,full:n=>`${n} elegidos. Elige 6, 9 o 12.`},
+     count:{case:n=>n?`${n} de 3 elegidos · toca uno otra vez para quitarlo`:'Elige tres objetos.',full:n=>n?`${n} elegidos · 6, 9 o 12 · toca uno otra vez para quitarlo`:'Elige 6, 9 o 12 objetos.'},
      go:{case:'Ver mi tarea',full:'Componer mis tareas'},reshuffle:{case:'Otros objetos',full:'Revolver la vitrina'},
      copy:{one:'Copiar la tarea',many:'Copiar las tareas'},copied:'Copiado.',copyFail:'Selecciona el texto de las tareas para copiarlo.',
      next:{one:'Otra tarea',many:'Otras tareas'},again:'Empezar de nuevo',
-     note:'Hazla en el recuadro, en papel o aquí en pantalla. No se guarda nada de lo que eliges, y lo que escribes se queda en esta página a menos que lo publiques.',
+     note:'Hazla en el recuadro, en pantalla o en papel. Lo que escribes se queda en esta página y se pierde al salir, a menos que lo guardes, lo imprimas o lo publiques. No se guarda nada de lo que eliges.',
+     save:'Guardar como imagen',
      write:'Escribe aquí, o imprime la hoja y escribe en ella.',
      publish:'Publicar sin nombre',confirm:'Aparecerá bajo esta tarea para que cualquiera la lea, sin nombre. Se mostrará cuando se haya revisado, y no se puede retirar.',
      yes:'Publicar',no:'Todavía no',sent:'Enviado. Aparecerá bajo esta tarea cuando se haya revisado, normalmente en un día.',
@@ -355,11 +358,37 @@ function othersBlock(n){
     add(3);more.addEventListener('click',()=>add(5));sec.append(ol,more);sec.hidden=false});
   return sec;
 }
+/* Save as an image: the sheet as on screen (task, what was written, the three objects, code and date),
+   drawn on a canvas and downloaded. Nothing leaves the visitor's device. */
+function wrapLines(ctx,text,w){const out=[];for(const para of String(text).split('\n')){let line='';
+  for(const word of para.split(/\s+/)){const t=line?line+' '+word:word;if(ctx.measureText(t).width>w&&line){out.push(line);line=word}else line=t}
+  out.push(line)}return out}
+async function saveSheet(sh,text){
+  try{await Promise.race([Promise.all(['600 60px Inter','400 28px Inter','36px VT323'].map(f=>document.fonts.load(f))),new Promise(r=>setTimeout(r,1500))])}catch(e){}
+  const W2=1240,H2=1754,P=110,c=document.createElement('canvas');c.width=W2;c.height=H2;const x=c.getContext('2d');
+  const ink='#000033';x.fillStyle='#fff';x.fillRect(0,0,W2,H2);x.fillStyle=ink;x.textBaseline='alphabetic';
+  const date=new Date().toLocaleDateString(lang==='es'?'es-MX':'en-GB',{day:'2-digit',month:'2-digit',year:'numeric'});
+  x.font='36px VT323, monospace';x.textAlign='left';x.fillText('Supermenu',P,P+30);x.textAlign='center';x.fillText(sh.code,W2/2,P+30);
+  x.textAlign='right';x.fillText(date,W2-P,P+30);x.textAlign='left';x.fillRect(P,P+48,W2-2*P,2);
+  x.font='600 60px Inter, sans-serif';let y=P+140;for(const l of wrapLines(x,sh.task[lang],W2-2*P)){x.fillText(l,P,y);y+=72}
+  const top=y+10,bottom=H2-P-200;x.lineWidth=3;x.strokeStyle=ink;x.strokeRect(P,top,W2-2*P,bottom-top);
+  x.font='400 28px Inter, sans-serif';let ty=top+56;const lines=wrapLines(x,text,W2-2*P-60),max=Math.floor((bottom-top-60)/40);
+  lines.slice(0,max).forEach((l,i)=>{x.fillText(i===max-1&&lines.length>max?l+' …':l,P+30,ty);ty+=40});
+  let ix=P;for(const id of sh.ids){const im=new Image();im.src=OBJ[id].img;try{await im.decode()}catch(e){}
+    const h=130,w=Math.min(170,im.naturalWidth?h*im.naturalWidth/im.naturalHeight:h);x.filter='grayscale(1)';x.drawImage(im,ix,H2-P-170,w,h);x.filter='none';
+    x.font='28px VT323, monospace';x.fillText(pad(id),ix,H2-P-10);ix+=w+40}
+  const a=document.createElement('a');a.download='supermenu-'+sh.code+'.png';
+  a.href=c.toDataURL('image/png');document.body.append(a);a.click();a.remove();
+}
 function publishBlock(sh,ta){
-  const sec=el('section','extra publish');if(!ANSWERS.form){sec.hidden=true;return sec}
+  const sec=el('section','extra publish');
   const draw=()=>{sec.textContent='';
+    const row0=el('div','row'),sv=el('button','btn',W().save);sv.type='button';sv.disabled=!ta.value.trim();
+    sv.addEventListener('click',()=>saveSheet(sh,ta.value.trim()));row0.append(sv);sec.append(row0);
+    ta.addEventListener('input',()=>{sv.disabled=!ta.value.trim()});
+    if(!ANSWERS.form)return;
     if(SENT.has(sh.code)){sec.append(el('p','said',W().sent));return}
-    const b=el('button','btn',W().publish);b.type='button';b.disabled=!ta.value.trim();
+    const b=el('button','btn',W().publish);b.type='button';b.disabled=!ta.value.trim();row0.append(b);
     ta.addEventListener('input',()=>{b.disabled=!ta.value.trim()});
     b.addEventListener('click',()=>{sec.textContent='';const box=el('div','confirm');
       box.append(el('q',null,ta.value.trim()),el('p','said',W().confirm));
@@ -367,7 +396,7 @@ function publishBlock(sh,ta){
       no.addEventListener('click',draw);
       yes.addEventListener('click',()=>{yes.disabled=no.disabled=true;publishAnswer(sh.task.n,ta.value.trim().slice(0,1200)).then(()=>{SENT.add(sh.code);draw()})});
       row.append(yes,no);box.append(row);sec.append(box);yes.focus()});
-    sec.append(b)};
+    };
   draw();return sec;
 }
 // For later (stored picks): one place where a finished choice could be recorded. Nothing is kept now.
@@ -385,7 +414,6 @@ function tellParent(msg){if(EMBED)try{parent.postMessage(Object.assign({supermen
 let hostView=0;
 function placeTray(){
   if(!EMBED)return;const tray=document.querySelector('.tray');tray.style.transform='';
-  if(document.body.dataset.mode!=='full')return;
   const grid=$('grid'),top=tray.offsetTop,end=grid.offsetTop+grid.offsetHeight-tray.offsetHeight;
   const s=Math.max(0,Math.min(hostView-top,end-top));if(s>0)tray.style.transform='translateY('+s+'px)';
 }
@@ -487,8 +515,12 @@ function toggle(id){
   renderGrid();renderTray();renderWords();
 }
 function setMode(m){
-  if(m===S.mode)return;S.mode=m;S.picks=[];S.sheets=[];$('answer').hidden=true;
-  if(m==='case')newSet();renderAll();
+  if(m===S.mode)return;const keep=S.picks.slice();S.mode=m;S.sheets=[];$('answer').hidden=true;
+  if(m==='case'){ // keep up to three of the chosen objects, placed among a fresh set of twelve
+    const k=keep.slice(0,3);newSet();
+    S.shown=shuffle([...k,...S.shown.filter(id=>!k.includes(id)).slice(0,SHOW-k.length)],rng(newSeed()));S.picks=k;
+  } else S.picks=keep;
+  renderAll();
 }
 $('go').addEventListener('click',()=>{
   if(!ready())return;
