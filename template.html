@@ -107,6 +107,17 @@ body.embed .tray{position:relative}
 .publish .confirm q{display:block;white-space:pre-wrap;quotes:none;border-left:3px solid var(--mark);padding-left:10px;max-height:9em;overflow:auto}
 .publish .row{display:flex;flex-wrap:wrap;gap:8px}
 .publish .said{color:var(--ink);margin:0}
+.why summary{cursor:pointer;font-family:var(--f-num);font-size:20px;line-height:1.1}
+.why summary:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
+.why .rules{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:8px}
+.why .rules li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;align-items:start;background:var(--ground);padding:8px 10px}
+.why .rules img{width:44px;height:52px;object-fit:contain;filter:grayscale(1)}
+.why .rules .no{font-family:var(--f-num);font-size:15px;color:var(--soft);display:block;text-align:center}
+.why .rn{font-family:var(--f-num);font-size:19px;line-height:1.1;color:var(--ink)}
+.why a.rn{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+.why .rd{display:block;font-size:13px;color:var(--ink);margin-top:2px}
+.why h4{font-family:var(--f-num);font-weight:400;font-size:17px;color:var(--soft);margin:12px 0 0}
+.why .how{font-size:13px;color:var(--soft);margin:10px 0 0}
 .others h3{font-family:var(--f-num);font-weight:400;font-size:20px;line-height:1;margin:6px 0 0}
 .others ol{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .others li{background:var(--ground);padding:10px 12px;white-space:pre-wrap;overflow-wrap:anywhere}
@@ -217,6 +228,8 @@ const WORDS={
      next:{one:'Another task',many:'Other tasks'},again:'Start again',
      note:'Do it in the box, on screen or on paper. What you write stays on this page and is gone when you leave, unless you save it, print it or publish it. Nothing you pick is kept.',
      save:'Save as an image',
+     why:'Why this task?',whyObjects:'Your objects carry these rules',whyTask:'The task carries these rules',
+     whyHow:'Each object carries one hidden rule for making things. The machine picks the task whose rules sit closest to the rules of your objects. Each rule links to Design Operations, where you can read more about it.',
      write:'Write here, or print the sheet and write on it.',
      publish:'Publish anonymously',confirm:'This will appear under this task for anyone to read, with no name. It shows once it has been checked, and it cannot be taken back.',
      yes:'Publish',no:'Not yet',sent:'Sent. It will appear under this task once it has been checked, usually within a day.',
@@ -233,6 +246,8 @@ const WORDS={
      next:{one:'Otra tarea',many:'Otras tareas'},again:'Empezar de nuevo',
      note:'Hazla en el recuadro, en pantalla o en papel. Lo que escribes se queda en esta página y se pierde al salir, a menos que lo guardes, lo imprimas o lo publiques. No se guarda nada de lo que eliges.',
      save:'Guardar como imagen',
+     why:'¿Por qué esta tarea?',whyObjects:'Tus objetos llevan estas reglas',whyTask:'La tarea lleva estas reglas',
+     whyHow:'Cada objeto lleva una regla oculta para hacer cosas. La máquina elige la tarea cuyas reglas están más cerca de las reglas de tus objetos. Cada regla lleva a Design Operations, donde puedes leer más sobre ella (en inglés).',
      write:'Escribe aquí, o imprime la hoja y escribe en ella.',
      publish:'Publicar sin nombre',confirm:'Aparecerá bajo esta tarea para que cualquiera la lea, sin nombre. Se mostrará cuando se haya revisado, y no se puede retirar.',
      yes:'Publicar',no:'Todavía no',sent:'Enviado. Aparecerá bajo esta tarea cuando se haya revisado, normalmente en un día.',
@@ -303,6 +318,23 @@ function publishAnswer(n,text){
   if(!ANSWERS.form)return Promise.resolve();
   const b=new URLSearchParams();b.append(ANSWERS.fields.task,String(n));b.append(ANSWERS.fields.answer,text);b.append(ANSWERS.fields.lang,lang);
   return fetch(ANSWERS.form,{method:'POST',mode:'no-cors',body:b}).catch(()=>{});
+}
+/* Why this task: closed by default, so the surprise comes first. Names the rule on each chosen object and the
+   two rules the task carries, each linked to the Design Operations explorer where it has a page there. */
+const EXPLORER='https://operations.ramos-saavedra.com/#', NOT_IN_EXPLORER=new Set(['DIFFER FROM EACH']);
+const opSlug=n=>String(n).toLowerCase().replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+function ruleLine(name,lead){
+  const li=el('li');li.append(lead||el('span'));const t=el('div');
+  let nm;if(NOT_IN_EXPLORER.has(name))nm=el('span','rn',name);else{nm=el('a','rn',name);nm.href=EXPLORER+opSlug(name);nm.target='_blank';nm.rel='noopener'}
+  t.append(nm);const d=D.ops[name]&&D.ops[name].do;if(d&&lang==='en')t.append(el('span','rd',d));li.append(t);return li;
+}
+function whyBlock(sh){
+  const det=el('details','extra why'),sum=el('summary',null,W().why);det.append(sum);
+  det.append(el('h4',null,W().whyObjects));const ol=el('ul','rules');
+  for(const id of sh.ids){const f=el('div'),im=el('img');im.src=OBJ[id].img;im.alt='';f.append(im,el('span','no',pad(id)));ol.append(ruleLine(OBJ[id].op,f))}
+  det.append(ol,el('h4',null,W().whyTask));const tl=el('ul','rules');
+  for(const c of sh.task.chain)tl.append(ruleLine(c));
+  det.append(tl,el('p','how',W().whyHow));return det;
 }
 function othersBlock(n){
   const sec=el('section','extra others');sec.hidden=true;
@@ -457,7 +489,7 @@ function renderSheets(animate){
     ta.value=TEXTS[sh.code]||'';out.textContent=ta.value;
     ta.addEventListener('input',()=>{TEXTS[sh.code]=ta.value;out.textContent=ta.value});
     space.append(ta,out);
-    a.append(top,el('p','task',sh.task[lang]),space,foot);box.append(a,publishBlock(sh,ta),othersBlock(sh.task.n));
+    a.append(top,el('p','task',sh.task[lang]),space,foot);box.append(a,publishBlock(sh,ta),whyBlock(sh),othersBlock(sh.task.n));
   });
   $('toast').textContent='';
 }

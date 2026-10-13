@@ -86,7 +86,7 @@ if problems:
 
 needed = {o['op'] for o in used} | {c for t in tasks for c in t['chain']} | {o['op'] for o in archive if o['op']}
 data = {'objects': used, 'archive': archive,
-        'ops': {k: {'xy': ops[k]['xy'], 'cat': ops[k]['cat']} for k in sorted(needed)},
+        'ops': {k: {'xy': ops[k]['xy'], 'cat': ops[k]['cat'], 'do': ops[k]['do']} for k in sorted(needed)},
         'tasks': [{'n': t['n'], 'en': t['en'], 'es': t['es'], 'chain': t['chain']} for t in tasks]}
 d = json.dumps(data, separators=(',', ':'), ensure_ascii=False).replace('</', '<\\/')
 versions = json.dumps([{k: v[k] for k in ('prefix', 'objects', 'tasks', 'ordered', 'length')} for v in codes['versions']],
