@@ -137,6 +137,8 @@ body.embed .tray{position:relative}
 .sheet-note{font-size:13px;color:var(--soft);margin:0;text-align:center}
 .after{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
 .toast{min-height:1.5em;color:var(--ink);font-size:14px;margin:0}
+.next-machine{width:min(100%,520px);margin:6px 0 0;padding-top:12px;border-top:1px solid var(--soft);font-size:14px;text-align:center}
+.next-machine a{color:var(--ink);font-weight:600}
 footer{font-size:12.5px;color:var(--soft);max-width:70ch;border-top:1px solid var(--rule);padding-top:12px}
 @media print{
   @page{size:A4;margin:0}
@@ -203,6 +205,7 @@ footer{font-size:12.5px;color:var(--soft);max-width:70ch;border-top:1px solid va
       <button type="button" class="btn quiet" id="again"></button>
     </div>
     <p class="toast" id="toast" role="status"></p>
+    <p class="next-machine"><span id="mmm-text"></span> <a id="mmm-link" href="https://mmm.ramos-saavedra.com/" target="_blank" rel="noopener"></a></p>
   </section>
 
   <footer id="credits"></footer>
@@ -214,6 +217,12 @@ footer{font-size:12.5px;color:var(--soft);max-width:70ch;border-top:1px solid va
 const D=JSON.parse(document.getElementById('data').textContent);
 const PRINT=false; // the site build turns this on; the hosted preview cannot print
 const SHOW=12, TAG='#supermenuARS';
+/* Anonymous counting (GoatCounter, no cookies): page visits and which buttons get pressed, on the published site only.
+   Never the objects chosen, the task given, or anything written. */
+const COUNT=/github\.io$/.test(location.hostname);
+if(COUNT){window.goatcounter={allow_frame:true,path:p=>'supermenu'+p.replace(/^\/supermenu/,'')};
+  const sc=document.createElement('script');sc.async=true;sc.src='https://gc.zgo.at/count.js';sc.dataset.goatcounter='https://alexo000.goatcounter.com/count';document.head.append(sc)}
+function tally(name){if(!COUNT)return;try{window.goatcounter&&window.goatcounter.count&&window.goatcounter.count({path:'supermenu/'+name,title:name,event:true})}catch(e){}}
 // how many picks each view takes: the case wants three; the full view six, nine or twelve
 const PICKS={case:[3],full:[6,9,12]};
 /*__CODEC__*/
@@ -226,8 +235,9 @@ const WORDS={
      go:{case:'Show my task',full:'Compose my tasks'},reshuffle:{case:'Another set of objects',full:'Shuffle the case'},
      copy:{one:'Copy the task',many:'Copy the tasks'},copied:'Copied.',copyFail:'Select the task text to copy it.',
      next:{one:'Another task',many:'Other tasks'},again:'Start again',
-     note:'Do it in the box, on screen or on paper. What you write stays on this page and is gone when you leave, unless you save it, print it or publish it. Nothing you pick is kept.',
+     note:'Do it in the box, on screen or on paper. What you write stays on this page and is gone when you leave, unless you save it, print it or publish it. Nothing you pick is kept; the page only counts visits and button presses.',
      save:'Save as an image',
+     mmmText:'Supermenu was the first of these machines. The latest mixes three pieces into an idol with something to do.',mmmLink:'Try Meaning Making Machine #3',
      why:'Why this task?',whyObjects:'Your objects carry these rules',whyTask:'The task carries these rules',
      whyHow:'Each object carries one hidden rule for making things. The machine picks the task whose rules sit closest to the rules of your objects. Each rule links to Design Operations, where you can read more about it.',
      write:'Write here, or print the sheet and write on it.',
@@ -244,8 +254,9 @@ const WORDS={
      go:{case:'Ver mi tarea',full:'Componer mis tareas'},reshuffle:{case:'Otros objetos',full:'Revolver la vitrina'},
      copy:{one:'Copiar la tarea',many:'Copiar las tareas'},copied:'Copiado.',copyFail:'Selecciona el texto de las tareas para copiarlo.',
      next:{one:'Otra tarea',many:'Otras tareas'},again:'Empezar de nuevo',
-     note:'Hazla en el recuadro, en pantalla o en papel. Lo que escribes se queda en esta página y se pierde al salir, a menos que lo guardes, lo imprimas o lo publiques. No se guarda nada de lo que eliges.',
+     note:'Hazla en el recuadro, en pantalla o en papel. Lo que escribes se queda en esta página y se pierde al salir, a menos que lo guardes, lo imprimas o lo publiques. No se guarda nada de lo que eliges; la página solo cuenta visitas y botones usados.',
      save:'Guardar como imagen',
+     mmmText:'Supermenu fue la primera de estas máquinas. La más reciente mezcla tres piezas en un ídolo con algo que hacer.',mmmLink:'Probar la Meaning Making Machine #3',
      why:'¿Por qué esta tarea?',whyObjects:'Tus objetos llevan estas reglas',whyTask:'La tarea lleva estas reglas',
      whyHow:'Cada objeto lleva una regla oculta para hacer cosas. La máquina elige la tarea cuyas reglas están más cerca de las reglas de tus objetos. Cada regla lleva a Design Operations, donde puedes leer más sobre ella (en inglés).',
      write:'Escribe aquí, o imprime la hoja y escribe en ella.',
@@ -330,6 +341,7 @@ function ruleLine(name,lead){
 }
 function whyBlock(sh){
   const det=el('details','extra why'),sum=el('summary',null,W().why);det.append(sum);
+  det.addEventListener('toggle',()=>{if(det.open)tally('why')});
   det.append(el('h4',null,W().whyObjects));const ol=el('ul','rules');
   for(const id of sh.ids){const f=el('div'),im=el('img');im.src=OBJ[id].img;im.alt='';f.append(im,el('span','no',pad(id)));ol.append(ruleLine(OBJ[id].op,f))}
   det.append(ol,el('h4',null,W().whyTask));const tl=el('ul','rules');
@@ -371,7 +383,7 @@ function publishBlock(sh,ta){
   const sec=el('section','extra publish');
   const draw=()=>{sec.textContent='';
     const row0=el('div','row'),sv=el('button','btn',W().save);sv.type='button';sv.disabled=!ta.value.trim();
-    sv.addEventListener('click',()=>saveSheet(sh,ta.value.trim()));row0.append(sv);sec.append(row0);
+    sv.addEventListener('click',()=>{tally('save-image');saveSheet(sh,ta.value.trim())});row0.append(sv);sec.append(row0);
     ta.addEventListener('input',()=>{sv.disabled=!ta.value.trim()});
     if(!ANSWERS.form)return;
     if(SENT.has(sh.code)){sec.append(el('p','said',W().sent));return}
@@ -381,7 +393,7 @@ function publishBlock(sh,ta){
       box.append(el('q',null,ta.value.trim()),el('p','said',W().confirm));
       const row=el('div','row'),yes=el('button','btn primary',W().yes),no=el('button','btn',W().no);yes.type=no.type='button';
       no.addEventListener('click',draw);
-      yes.addEventListener('click',()=>{yes.disabled=no.disabled=true;publishAnswer(sh.task.n,ta.value.trim().slice(0,1200)).then(()=>{SENT.add(sh.code);draw()})});
+      yes.addEventListener('click',()=>{tally('publish');yes.disabled=no.disabled=true;publishAnswer(sh.task.n,ta.value.trim().slice(0,1200)).then(()=>{SENT.add(sh.code);draw()})});
       row.append(yes,no);box.append(row);sec.append(box);yes.focus()});
     };
   draw();return sec;
@@ -466,7 +478,7 @@ function renderWords(){
   $('case-set').textContent=S.mode==='full'?W().many(ALL.length):W().set(S.setNo);
   $('go').textContent=W().go[S.mode];$('reshuffle').textContent=W().reshuffle[S.mode];
   $('copy').textContent=W().copy[many];$('print').textContent=W().print[many];$('print').hidden=!PRINT;
-  $('next').textContent=W().next[many];$('again').textContent=W().again;$('sheet-note').textContent=W().note;$('credits').textContent=W().credits;
+  $('next').textContent=W().next[many];$('again').textContent=W().again;$('sheet-note').textContent=W().note;$('credits').textContent=W().credits;$('mmm-text').textContent=W().mmmText;$('mmm-link').textContent=W().mmmLink;
   for(const b of document.querySelectorAll('[data-lang]'))b.setAttribute('aria-pressed',b.dataset.lang===lang);
   for(const b of document.querySelectorAll('button[data-mode]'))b.setAttribute('aria-pressed',b.dataset.mode===S.mode);
 }
@@ -502,7 +514,7 @@ function toggle(id){
   renderGrid();renderTray();renderWords();
 }
 function setMode(m){
-  if(m===S.mode)return;const keep=S.picks.slice();S.mode=m;S.sheets=[];$('answer').hidden=true;
+  if(m===S.mode)return;tally('mode-'+(m==='full'?'several':'one'));const keep=S.picks.slice();S.mode=m;S.sheets=[];$('answer').hidden=true;
   if(m==='case'){ // keep up to three of the chosen objects, placed among a fresh set of twelve
     const k=keep.slice(0,3);newSet();
     S.shown=shuffle([...k,...S.shown.filter(id=>!k.includes(id)).slice(0,SHOW-k.length)],rng(newSeed()));S.picks=k;
@@ -511,16 +523,16 @@ function setMode(m){
 }
 $('go').addEventListener('click',()=>{
   if(!ready())return;
-  S.shift=0;S.sheets=compose(S.picks,0);recordPicks(S.sheets);
+  S.shift=0;S.sheets=compose(S.picks,0);recordPicks(S.sheets);tally(S.mode==='full'?'tasks-'+S.sheets.length:'task');
   $('answer').hidden=false;renderWords();renderSheets(true);
   goTo($('answer'));
 });
-$('print').addEventListener('click',()=>{
+$('print').addEventListener('click',()=>{tally('print');
   const codes=S.sheets.map(s=>s.code).join('.');
   if(EMBED){const u=location.origin+location.pathname+'?print#'+codes;const w=window.open(u,'_blank');if(!w)location.href=u}
   else window.print();
 });
-$('next').addEventListener('click',()=>{S.shift++;S.sheets=compose(S.picks,S.shift);renderSheets(true)});
+$('next').addEventListener('click',()=>{tally('another-task');S.shift++;S.sheets=compose(S.picks,S.shift);renderSheets(true)});
 $('again').addEventListener('click',()=>{
   S.picks=[];S.sheets=[];$('answer').hidden=true;
   if(S.mode==='case'){S.setNo++;newSet()}else S.fullOrder=shuffle(ALL,rng(newSeed()));
@@ -531,13 +543,14 @@ $('reshuffle').addEventListener('click',()=>{
   else S.fullOrder=shuffle(ALL,rng(newSeed()));
   renderAll();
 });
-$('copy').addEventListener('click',()=>{
+$('copy').addEventListener('click',()=>{tally('copy');
   const text=S.sheets.map((s,k)=>(S.sheets.length>1?`${k+1}. `:'')+s.task[lang]).join('\n');
   try{navigator.clipboard.writeText(text).then(()=>{$('toast').textContent=W().copied},()=>fallback())}catch(e){fallback()}
   function fallback(){const r=document.createRange();r.selectNodeContents($('sheets'));const s=getSelection();s.removeAllRanges();s.addRange(r);$('toast').textContent=W().copyFail}
 });
-for(const b of document.querySelectorAll('[data-lang]'))b.addEventListener('click',()=>{lang=b.dataset.lang;try{localStorage.setItem('supermenu.lang',lang)}catch(e){}renderAll()});
+for(const b of document.querySelectorAll('[data-lang]'))b.addEventListener('click',()=>{lang=b.dataset.lang;tally('lang-'+lang);try{localStorage.setItem('supermenu.lang',lang)}catch(e){}renderAll()});
 for(const b of document.querySelectorAll('button[data-mode]'))b.addEventListener('click',()=>setMode(b.dataset.mode));
+$('mmm-link').addEventListener('click',()=>tally('to-mmm3'));
 
 newSet();
 const h=location.hash.slice(1);
